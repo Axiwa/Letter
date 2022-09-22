@@ -6,6 +6,14 @@
 ### Windows
 安装包下载完，打开.exe，按照默认选项安装即可。在任意空白处单机右键，可以看到Git Bash Here就下载成功了！
 
+#### NOTE
+安装Git时，可能会询问是否使用Git自带的ssh
+[![xkFs61.md.png](https://s1.ax1x.com/2022/09/23/xkFs61.md.png)](https://imgse.com/i/xkFs61)
+如果不想自己装，且没有，就选默认值！
+
+如果不熟悉vim编辑器，可以在这一步选择习惯的编辑器，比如txt文档
+[![xkFrlR.md.png](https://s1.ax1x.com/2022/09/23/xkFrlR.md.png)](https://imgse.com/i/xkFrlR)
+
 
 ### macOS
 
@@ -38,6 +46,7 @@ sudo apt update && sudo apt install git
 
 ### 安装OpenSSH
 #### Windows
+如果已经在刚才的步骤选择了用Git自带的SSH，则不需要这一步了
 
 Follow the instructions under “Enable OpenSSH Client in Windows 10” on [https://winaero.com/blog/enable-openssh-client-windows-10/](https://winaero.com/blog/enable-openssh-client-windows-10/) 或 [https://learn.microsoft.com/zh-cn/windows-server/administration/openssh/openssh_install_firstuse]()
 
