@@ -14,6 +14,8 @@
 如果不熟悉vim编辑器，可以在这一步选择习惯的编辑器，比如txt文档
 [![xkFrlR.md.png](https://s1.ax1x.com/2022/09/23/xkFrlR.md.png)](https://imgse.com/i/xkFrlR)
 
+其他默认就好，如果之后出现右键空白处没有`Git bash Here`，请看
+
 
 ### macOS
 
@@ -40,6 +42,7 @@ brew install git
 ```
 sudo apt update && sudo apt install git
 ```
+
 
 ## 生成自己的SSH key pair
 把本地的文件push到github或者pull代码到本地时，github需要知道你是不是有权限，所以我们需要两个key，一个private，一个public，private key保存在本地user个人目录下的`.ssh`文件夹中，public key复制给github，就可以顺利操作了
@@ -113,6 +116,16 @@ git clone git@github.com:Axiwa/Letter.git
 * 在scratch文件夹里随便添加点什么！
 
 * 在Letter文件夹中右键，`Git bash Here`
+
+* 设置默认用户
+
+```bash
+# 设置全局用户，如果只是本仓库用这个用户，去掉--global选项
+git config --global user.email "you@example.com"
+# 邮箱
+git config --global user.name "Your Name"
+# 用户名
+```
 
 * 依次执行以下三行命令
 

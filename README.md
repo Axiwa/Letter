@@ -8,7 +8,7 @@ code -- unity的代码库
 
 copywriting -- 文案
 
-management -- 
+management -- 管理&基础架构
 
 scratch -- 随意!
 
