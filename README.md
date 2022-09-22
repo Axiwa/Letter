@@ -12,5 +12,5 @@ management --
 
 scratch -- 随意!
 
-## [Git配置点我](https://github.com/Axiwa/Letter/blob/master/management/Git.md)
+## [Git配置](https://github.com/Axiwa/Letter/blob/master/management/Git.md)
 
