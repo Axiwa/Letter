@@ -17,7 +17,7 @@
 
 [![xkFrlR.md.png](https://s1.ax1x.com/2022/09/23/xkFrlR.md.png)](https://imgse.com/i/xkFrlR)
 
-其他默认就好，如果之后出现右键空白处没有`Git bash Here`，请看[https://stackoverflow.com/questions/24386657/how-to-add-a-open-git-bash-here-context-menu-to-the-windows-explorer/]()。但默认
+其他默认就好，如果之后出现右键空白处没有`Git bash Here`，请看[https://stackoverflow.com/questions/24386657/how-to-add-a-open-git-bash-here-context-menu-to-the-windows-explorer/]()。但默认安装应该有
 
 
 ### macOS
