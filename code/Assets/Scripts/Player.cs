@@ -74,13 +74,35 @@ public class Player : MonoBehaviour
             isGrounded = true;
         }
         if (other.gameObject.CompareTag(ENEMY_TAG)){
-            Destroy(gameObject);
+            var player = GetComponent<Collider2D>();
+            var extents = player.bounds.extents.y;
+            var pos = transform.position.y - extents;
+            Debug.Log(pos + " " + other.collider.bounds.center.y);
+
+            if (pos >= other.collider.bounds.center.y-0.1){
+                Destroy(other.gameObject);
+                myBody.AddForce(new Vector2(0f, 3f), ForceMode2D.Impulse);
+            }
+            else{
+                Destroy(gameObject);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag(ENEMY_TAG)){
-            Destroy(gameObject);
+            var player = GetComponent<Collider2D>();
+            var extents = player.bounds.extents.y;
+            var pos = transform.position.y - extents;
+            Debug.Log(pos + " " + other.bounds.center.y);
+
+            if (pos >= other.bounds.center.y-0.1){
+                Destroy(other.gameObject);
+                myBody.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            }
+            else{
+                Destroy(gameObject);
+            }
         }
     }
 }
