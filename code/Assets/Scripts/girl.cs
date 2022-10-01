@@ -2,83 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class girl : MonoBehaviour
 {
+    private GameObject _letter;
+    public GameObject letter{
+        get {return _letter;}
+        set {_letter = value;}
+    }
     [SerializeField]
-    private float moveForce = 10f;
+    private float velocity = 1f;
     [SerializeField]
-    private float jumpForce = 11f;
+    private float jumpForce = 3f;
     private Rigidbody2D myBody;
     private Animator anim;
     private string WALK_ANIMATION = "Walk";
-    [HideInInspector]
-    public bool isGrounded = true;
+    private bool isGrounded = true;
     private string GROUND_TAG = "Ground";
     private string ENEMY_TAG = "Enemy";
     private SpriteRenderer sr;
     private float movementX = 22f;
-
-
-    private void Awake(){
-        myBody = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
-    }
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    private void FixedUpdate() {
-        PlayerJump();
+        myBody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();     
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerMOveKeyboard();
-        AnimatePlayer();
-        PlayerJump();
-    }
-
-    void PlayerMOveKeyboard(){
-        movementX = Input.GetAxisRaw("Horizontal"); // GetAxis: not only -1 and 1
-        
-        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
-    }
-
-    void AnimatePlayer(){
-        if (movementX > 0){
-            anim.SetBool(WALK_ANIMATION, true);
-            sr.flipX = false;
+        if (!letter){
+            Destroy(gameObject);
+            return;
         }
-        else if (movementX < 0){
-            anim.SetBool(WALK_ANIMATION, true);
-            sr.flipX = true;
-        }
-        else{
-            anim.SetBool(WALK_ANIMATION, false);
+        changeDir();
+        if (Vector3.Distance(transform.position, letter.transform.position) > 1.5f && Vector3.Distance(transform.position, letter.transform.position) <= 10f){
+            follow();
         }
         
     }
 
-    void PlayerJump(){
-        if (Input.GetButtonDown("Jump") && isGrounded){ // GetButtonUp: once you leave the button // GetButton: you hold and it will continue to be triggered
-            isGrounded = false;
-            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-        }
+    private void LateUpdate() {
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag(GROUND_TAG)){
             isGrounded = true;
-            jumpForce = 11f;
-        }
-        if (other.gameObject.CompareTag("Girl")){
-            isGrounded = true;
-            jumpForce = 5f;
-        }
+        }  
         if (other.gameObject.CompareTag(ENEMY_TAG)){
             var player = GetComponent<Collider2D>();
             var extents = player.bounds.extents.y;
@@ -91,8 +62,27 @@ public class Player : MonoBehaviour
             }
             else{
                 Destroy(gameObject);
+                Debug.Log("YOU LOST!!! ");
             }
         }
+    }
+
+    private void changeDir(){
+        if (transform.position.x - letter.transform.position.x > 0){
+            sr.flipX = false;
+        }
+        else{
+            sr.flipX = true;
+        }
+    }
+    private void follow(){
+        float movementX = (letter.transform.position.x - transform.position.x) * velocity;
+        // myBody.AddForce(new Vector2(movementX, 0f), ForceMode2D.Impulse);
+        if (isGrounded){
+            isGrounded = false;
+            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);        
+        }
+        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime;  
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -108,6 +98,7 @@ public class Player : MonoBehaviour
             }
             else{
                 Destroy(gameObject);
+                Debug.Log("YOU LOST!!! ");
             }
         }
     }

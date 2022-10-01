@@ -45,6 +45,7 @@
      <Compile Include="Assets/Scripts/Spawner.cs" />
      <Compile Include="Assets/Scripts/home.cs" />
      <Compile Include="Assets/Scripts/restart.cs" />
+     <Compile Include="Assets/Scripts/girl.cs" />
      <None Include="Assets/Fonts/font info.txt" />
     <Reference Include="UnityEngine">
         <HintPath>/media/axiwa/Windows/Users/28025/Downloads/Unity/2021.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
