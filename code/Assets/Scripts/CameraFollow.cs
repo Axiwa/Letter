@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     private Vector3 tempPos;
 
     [SerializeField]
-    private float minX = -15, maxX = 95;
+    private float minX = -100, maxX = 200;
     // Start is called before the first frame update
     void Start()
     {
