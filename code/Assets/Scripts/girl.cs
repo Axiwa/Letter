@@ -36,7 +36,7 @@ public class girl : MonoBehaviour
             return;
         }
         changeDir();
-        if (Vector3.Distance(transform.position, letter.transform.position) > 1.5f && Vector3.Distance(transform.position, letter.transform.position) <= 10f){
+        if (abs(transform.position.x - letter.transform.position.x) > 2f && Vector3.Distance(transform.position, letter.transform.position) <= 10f){
             follow();
         }
         
@@ -69,10 +69,10 @@ public class girl : MonoBehaviour
 
     private void changeDir(){
         if (transform.position.x - letter.transform.position.x > 0){
-            sr.flipX = false;
+            sr.flipX = true;
         }
         else{
-            sr.flipX = true;
+            sr.flipX = false;
         }
     }
     private void follow(){
@@ -100,6 +100,15 @@ public class girl : MonoBehaviour
                 Destroy(gameObject);
                 Debug.Log("YOU LOST!!! ");
             }
+        }
+    }
+
+    float abs(float a){
+        if (a > 0){
+            return a;
+        }
+        else{
+            return -a;
         }
     }
 }

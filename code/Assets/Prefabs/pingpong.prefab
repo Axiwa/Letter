@@ -124,9 +124,9 @@ GameObject:
   - component: {fileID: 6630630506761977532}
   - component: {fileID: 6630630506761977507}
   - component: {fileID: 1082463788975733810}
-  - component: {fileID: 1273630387}
+  - component: {fileID: 7470250376377297231}
   m_Layer: 6
-  m_Name: Ghost
+  m_Name: pingpong
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,8 +140,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6630630506761977505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.35, y: -2.95, z: 0}
-  m_LocalScale: {x: 0.53616285, y: 0.53616285, z: 0.53616285}
+  m_LocalPosition: {x: 14.2255, y: -2.9085, z: 0}
+  m_LocalScale: {x: 0.4868466, y: 0.48676252, z: 0.7532016}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9174131621340744254}
@@ -257,7 +257,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.93, y: 2.2}
   m_Direction: 0
---- !u!114 &1273630387
+--- !u!114 &7470250376377297231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,7 +266,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6630630506761977505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187ad733a3fcb36b784797ba9bc8a6b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b279b2569a27c355a064b9cea3a1670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 2
+  maxX: 15

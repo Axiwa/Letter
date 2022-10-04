@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class Moon : MonoBehaviour
 {
     private Transform player;
     private Vector3 tempPos;
 
     [SerializeField]
     private float minX = -100, maxX = 200;
-    // private float minY = -10, maxY = 30;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +25,7 @@ public class CameraFollow : MonoBehaviour
         }
         
         tempPos = transform.position;
-        tempPos.x = player.position.x;
+        tempPos.x = 0.8f * player.position.x - 7f;
 
         if (tempPos.x < minX){
             tempPos.x = minX;
@@ -34,12 +33,6 @@ public class CameraFollow : MonoBehaviour
         if (tempPos.x > maxX){
             tempPos.x = maxX;
         }
-        // if (tempPos.y < minY){
-        //     tempPos.y = minY;
-        // }
-        // if (tempPos.y > maxY){
-        //     tempPos.y = maxY;
-        // }
 
         transform.position = tempPos;
     }

@@ -8,16 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Dictionary<string, int> table=new Dictionary<string, int>(){
         {"Button", 0},
-        {"Button2", 1}
     };
     [SerializeField]
     private GameObject[] characters;
-
-    private int __charIndex;
-    public int CharIndex{
-        get {return __charIndex;}
-        set {__charIndex = value;}
-    }
 
     private void Awake() {
         if (instance == null){
@@ -39,8 +32,8 @@ public class GameManager : MonoBehaviour
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode){
         if (scene.name == "GamePlay"){
-            var littlegirl = Instantiate(characters[2]);
-            var player = Instantiate(characters[CharIndex]);
+            var littlegirl = Instantiate(characters[1]);
+            var player = Instantiate(characters[0]);
             littlegirl.GetComponent<girl>().letter = player;
         }
     }
