@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField]
     private float minX = -100, maxX = 200;
-    // private float minY = -10, maxY = 30;
+    private float minY = -100, maxY = 1000;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +27,7 @@ public class CameraFollow : MonoBehaviour
         
         tempPos = transform.position;
         tempPos.x = player.position.x;
+        tempPos.y = player.position.y+2;
 
         if (tempPos.x < minX){
             tempPos.x = minX;
@@ -34,12 +35,12 @@ public class CameraFollow : MonoBehaviour
         if (tempPos.x > maxX){
             tempPos.x = maxX;
         }
-        // if (tempPos.y < minY){
-        //     tempPos.y = minY;
-        // }
-        // if (tempPos.y > maxY){
-        //     tempPos.y = maxY;
-        // }
+        if (tempPos.y < minY){
+            tempPos.y = minY;
+        }
+        if (tempPos.y > maxY){
+            tempPos.y = maxY;
+        }
 
         transform.position = tempPos;
     }
