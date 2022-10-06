@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5112713901380464310}
   m_LocalRotation: {x: 0, y: 0, z: -0.00041888613, w: 0.99999994}
   m_LocalPosition: {x: -3.25, y: -3.0431406, z: 0}
-  m_LocalScale: {x: 0.8820126, y: 0.7724775, z: 0.7769853}
+  m_LocalScale: {x: 0.6230955, y: 0.5457147, z: 0.54889923}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3915895559819236830}
@@ -160,8 +160,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 10
-  jumpForce: 8
+  originJumpForce: 12
   isGrounded: 1
+  bonus: 0
+  bigBonus: 0
 --- !u!70 &1817280624
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

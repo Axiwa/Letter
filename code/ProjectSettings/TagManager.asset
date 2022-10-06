@@ -7,15 +7,19 @@ TagManager:
   - Ground
   - Enemy
   - Girl
+  - Sound
+  - debris
+  - leucocyte
+  - Stair
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Enemy
-  - 
+  - ButtonGround
   - 
   - 
   - 

@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class home : MonoBehaviour
 {
+    GameObject obj = null;
     public void returnhome(){
+        obj = GameObject.FindGameObjectWithTag("Sound");
+        Destroy(obj);
         SceneManager.LoadScene("UI");
     }
 }

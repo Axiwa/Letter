@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode){
-        if (scene.name == "GamePlay"){
+        if (scene.name == "0"){
             var littlegirl = Instantiate(characters[1]);
             var player = Instantiate(characters[0]);
             littlegirl.GetComponent<girl>().letter = player;

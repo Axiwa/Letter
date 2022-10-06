@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveForce = 10f;
     [SerializeField]
-    private float jumpForce = 11f;
+    private float originJumpForce = 20f;
+    private float jumpForce = 20f;
     private Rigidbody2D myBody;
     private Animator anim;
     private string WALK_ANIMATION = "Walk";
@@ -15,8 +16,14 @@ public class Player : MonoBehaviour
     public bool isGrounded = true;
     private string GROUND_TAG = "Ground";
     private string ENEMY_TAG = "Enemy";
+    private string TRICK_TAG = "Stair";
     private SpriteRenderer sr;
     private float movementX = 22f;
+    [HideInInspector]
+    public int bonus = 0;
+    [HideInInspector]
+    public int bigBonus = 0;
+    private bool hasCollided = false;
 
 
     private void Awake(){
@@ -71,19 +78,23 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag(GROUND_TAG)){
+        if (hasCollided){
+            return;
+        }
+        hasCollided = true;
+        if (other.gameObject.CompareTag(GROUND_TAG) || other.gameObject.CompareTag(TRICK_TAG)){
             isGrounded = true;
-            jumpForce = 11f;
+            jumpForce = originJumpForce;
         }
         if (other.gameObject.CompareTag("Girl")){
             isGrounded = true;
-            jumpForce = 5f;
+            jumpForce = 8f;
         }
         if (other.gameObject.CompareTag(ENEMY_TAG)){
             var player = GetComponent<Collider2D>();
             var extents = player.bounds.extents.y;
             var pos = transform.position.y - extents;
-            Debug.Log(pos + " " + other.collider.bounds.center.y);
+            // Debug.Log(pos + " " + other.collider.bounds.center.y);
 
             if (pos >= other.collider.bounds.center.y-0.1){
                 Destroy(other.gameObject);
@@ -93,14 +104,26 @@ public class Player : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if (other.gameObject.CompareTag("debris")){
+            // 信封动画
+            bonus++;
+            Debug.Log("haha");
+        }
+        if (other.gameObject.CompareTag("leucocyte")){
+            bigBonus++;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (hasCollided){
+            return;
+        }
+        hasCollided = true;
         if (other.CompareTag(ENEMY_TAG)){
             var player = GetComponent<Collider2D>();
             var extents = player.bounds.extents.y;
             var pos = transform.position.y - extents;
-            Debug.Log(pos + " " + other.bounds.center.y);
+            // Debug.Log(pos + " " + other.bounds.center.y);
 
             if (pos >= other.bounds.center.y-0.1){
                 Destroy(other.gameObject);
@@ -110,5 +133,17 @@ public class Player : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if (other.gameObject.CompareTag("debris")){
+            // 信封动画
+            bonus++;
+            Debug.Log("haha");
+        }
+        if (other.gameObject.CompareTag("leucocyte")){
+            bigBonus++;
+        }
+    }
+
+    private void LateUpdate() {
+        hasCollided = false;
     }
 }

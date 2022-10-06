@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Now the monster speed is: " + speed);
+
     }
 
     // Update is called once per frame

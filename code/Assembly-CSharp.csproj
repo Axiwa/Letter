@@ -39,16 +39,22 @@
      <Compile Include="Assets/Scripts/home.cs" />
      <Compile Include="Assets/Scripts/girl.cs" />
      <Compile Include="Assets/Scripts/CameraFollow.cs" />
+     <Compile Include="Assets/Scripts/lineInfo.cs" />
      <Compile Include="Assets/Scripts/Player.cs" />
      <Compile Include="Assets/Scripts/Moon.cs" />
      <Compile Include="Assets/Scripts/menuController.cs" />
+     <Compile Include="Assets/Scripts/bonusCount.cs" />
      <Compile Include="Assets/Scripts/Collector.cs" />
+     <Compile Include="Assets/Scripts/t0.cs" />
+     <Compile Include="Assets/Scripts/bonus.cs" />
      <Compile Include="Assets/Scripts/Monster.cs" />
      <Compile Include="Assets/Scripts/menu.cs" />
      <Compile Include="Assets/Scripts/restart.cs" />
      <Compile Include="Assets/Scripts/GameManager.cs" />
+     <Compile Include="Assets/Scripts/music0.cs" />
      <Compile Include="Assets/Scripts/Pingpong.cs" />
      <Compile Include="Assets/Scripts/Spawner.cs" />
+     <Compile Include="Assets/Scripts/stair0_0.cs" />
      <None Include="Assets/Fonts/font info.txt" />
     <Reference Include="UnityEngine">
         <HintPath>/media/axiwa/Windows/Users/28025/Downloads/Unity/2021.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

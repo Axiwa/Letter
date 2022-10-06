@@ -7,11 +7,18 @@ public class menuController : MonoBehaviour
 {
     [SerializeField]
     private GameObject window;
+    [SerializeField]
+    private GameObject t0;
+    [SerializeField]
+    private GameObject music;
     public void PlayGame(){
         string clickedObj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
-        Debug.Log(clickedObj);
+        window.SetActive(false);
 
-        SceneManager.LoadScene("GamePlay");
+        t0.SetActive(true);
+        music.SetActive(true);
+
+        // SceneManager.LoadScene("0");
     }
 
     public void EndGame(){

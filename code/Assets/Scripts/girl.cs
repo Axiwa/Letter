@@ -54,7 +54,7 @@ public class girl : MonoBehaviour
             var player = GetComponent<Collider2D>();
             var extents = player.bounds.extents.y;
             var pos = transform.position.y - extents;
-            Debug.Log(pos + " " + other.collider.bounds.center.y);
+            // Debug.Log(pos + " " + other.collider.bounds.center.y);
 
             if (pos >= other.collider.bounds.center.y-0.1){
                 Destroy(other.gameObject);
@@ -90,7 +90,7 @@ public class girl : MonoBehaviour
             var player = GetComponent<Collider2D>();
             var extents = player.bounds.extents.y;
             var pos = transform.position.y - extents;
-            Debug.Log(pos + " " + other.bounds.center.y);
+            // Debug.Log(pos + " " + other.bounds.center.y);
 
             if (pos >= other.bounds.center.y-0.1){
                 Destroy(other.gameObject);
