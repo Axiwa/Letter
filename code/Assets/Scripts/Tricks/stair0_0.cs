@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class stair0_0 : MonoBehaviour
+public class stair0_0 : Stair
 {
     [SerializeField]
     Vector3 start;
@@ -25,7 +25,8 @@ public class stair0_0 : MonoBehaviour
         
     }
 
-    void Move(){
+    public override void Move() {
         transform.position = target;
     }
+
 }

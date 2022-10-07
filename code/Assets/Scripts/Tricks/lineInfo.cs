@@ -9,8 +9,13 @@ public class lineInfo : MonoBehaviour
     bool hasCollided = false;
     private string TRICK_TAG = "Stair";
     // Start is called before the first frame update
-    void Start(){
+    private GameObject parent;
 
+    void Awake(){
+        parent = transform.parent.gameObject;
+    }
+    void Start(){
+        
     }
 
     // Update is called once per frame
@@ -31,9 +36,8 @@ public class lineInfo : MonoBehaviour
         if (other.gameObject.CompareTag(TRICK_TAG)){
             // 播放音效
             // INFORM stair to play animation
-            if (moveInfo != null){
-                moveInfo();
-            }
+            GameObject stair = parent.transform.Find("stair").gameObject;
+            stair.GetComponent<Stair>().Move();
         }
     }
 }

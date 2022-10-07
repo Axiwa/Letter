@@ -16,9 +16,7 @@ public class menuController : MonoBehaviour
         window.SetActive(false);
 
         t0.SetActive(true);
-        music.SetActive(true);
-
-        // SceneManager.LoadScene("0");
+        // SceneManager.LoadScene("1");
     }
 
     public void EndGame(){

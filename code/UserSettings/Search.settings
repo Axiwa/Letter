@@ -8,7 +8,7 @@ showPackageIndexes = false
 showStatusBar = false
 scopes = {
 	"last_search.DA949528" = "audio source"
-	"OpenInspectorPreview.DA949528" = "0"
+	"OpenInspectorPreview.DA949528" = "1"
 	"currentGroup.DA949528" = "settings"
 }
 providers = {

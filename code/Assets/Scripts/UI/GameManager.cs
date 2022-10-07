@@ -31,10 +31,11 @@ public class GameManager : MonoBehaviour
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode){
-        if (scene.name == "0"){
+        if (scene.name == "1"){
             var littlegirl = Instantiate(characters[1]);
             var player = Instantiate(characters[0]);
             littlegirl.GetComponent<girl>().letter = player;
+            player.GetComponent<Player>().girl = littlegirl;
         }
     }
 }

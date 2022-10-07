@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class music0 : MonoBehaviour
+public class music : MonoBehaviour
 {
-    private static GameObject instance; 
-    GameObject obj = null;  
+    private static music instance; 
+
     private void Awake() {
         if (instance == null){
-            instance = this.gameObject;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else{

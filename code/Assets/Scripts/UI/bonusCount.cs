@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class bonusCount : MonoBehaviour
 {
-    private Player letter;
+    private GameObject letter;
     private GameObject temp;
     private Text text;
 
@@ -14,11 +14,7 @@ public class bonusCount : MonoBehaviour
     }
 
     void Start(){
-        temp = GameObject.FindWithTag("Player");
-        if (temp.CompareTag("Player")){
-            Debug.Log("?????????");
-        }
-        letter = GameObject.FindWithTag("Player").GetComponent<Player>();
+        letter = GameObject.FindWithTag("Player");
         text = GetComponent<Text>();
     }
 
@@ -29,6 +25,7 @@ public class bonusCount : MonoBehaviour
     }
 
     public void textChange(){
-        text.text = letter.bonus.ToString();
+        if (text != null && letter != null)
+            text.text = letter.GetComponent<Player>().bonus.ToString();
     }
 }

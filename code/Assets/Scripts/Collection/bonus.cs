@@ -25,14 +25,7 @@ public class bonus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Player")){
-            // 向玩家移动，在到达之前不会消失，透明度下降
-            Destroy(gameObject);
-        }
+        // Animation for player
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -41,4 +34,5 @@ public class bonus : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }
