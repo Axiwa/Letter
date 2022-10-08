@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
     private string ENEMY_TAG = "Enemy";
     private string TRICK_TAG = "Stair";
 
-    private SpriteRenderer sr;
+    [HideInInspector]
+    public SpriteRenderer sr;
     private float movementX = 22f;
 
     [HideInInspector]

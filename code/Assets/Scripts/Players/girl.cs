@@ -66,6 +66,7 @@ public class girl : MonoBehaviour
         }
 
         // 方向朝着主角
+        Debug.Log(inside);
         changeDir();
 
         // 小女孩不要动
@@ -73,14 +74,13 @@ public class girl : MonoBehaviour
             return;
         }
         if (inside){
-            transform.position = letter.transform.position + new Vector3(0, 1, 0);
             return;
         }
 
         // 小女孩可以动
         // 足够近，小女孩完全同步，不能跳跃，速度没有主角高
         // 如果主角正在向小女孩走，小女孩不动
-        if (Vector3.Distance(transform.position, letter.transform.position) < 6f){
+        if (Vector3.Distance(transform.position, letter.transform.position) < 4f){
             if (!letter.GetComponent<SpriteRenderer>().flipX && transform.position.x < letter.transform.position.x ||
             letter.GetComponent<SpriteRenderer>().flipX && transform.position.x > letter.transform.position.x){
                 PlayerMoveKeyboard();
@@ -105,21 +105,29 @@ public class girl : MonoBehaviour
     }
 
     private void follow(){
-        float movementX = runForce;
+        movementX = 1;
         if ((letter.transform.position.x - transform.position.x) < 0){
-            movementX = -movementX;
+            movementX = -1;
+        }
+        else if ((letter.transform.position.x - transform.position.x) == 0)
+        {
+            movementX = 0;
         }
         // myBody.AddForce(new Vector2(movementX, 0f), ForceMode2D.Impulse);
         if (isGrounded){
             isGrounded = false;      
+            myBody.AddForce(new Vector2(0f, 1f), ForceMode2D.Impulse);
         }
-        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime;
+        transform.position += new Vector3(runForce * movementX, 0f, 0f) * Time.deltaTime;
         AnimatePlayer();
     }
 
 
     private void LateUpdate() {
-  
+        if (inside){
+            transform.position = letter.transform.position + new Vector3(0, 1, 0);
+        }
+        AnimatePlayer();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -163,6 +171,10 @@ public class girl : MonoBehaviour
     }
 
     private void changeDir(){
+        if (inside){
+            sr.flipX = letter.GetComponent<Player>().sr.flipX;
+            return;
+        }
         if (transform.position.x - letter.transform.position.x > 0){
             sr.flipX = true;
         }
@@ -173,8 +185,9 @@ public class girl : MonoBehaviour
 
 
     void AnimatePlayer(){
-        if (beQuiet){
+        if (beQuiet || inside){
             anim.SetBool(WALK_ANIMATION, false);
+            sr.flipX = letter.GetComponent<Player>().sr.flipX;
             return;
         }
         if (movementX > 0){
