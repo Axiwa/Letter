@@ -161,6 +161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 10
   originJumpForce: 12
+  jumpForce: 20
+  girlForce: 5
   isGrounded: 1
   bonus: 0
   bigBonus: 0

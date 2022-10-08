@@ -73,11 +73,14 @@ public class Player : MonoBehaviour
             girl.transform.position = transform.position;
             jumpForce = girlForce;
             girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = true; 
+            girl.GetComponent<girl>().beQuiet = false;
         }
 
         else if (Input.GetKeyDown(KeyCode.E) && girl.GetComponent<girl>().inside == true){
             girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = false;  
-            girl.GetComponent<girl>().inside = false;        
+            girl.transform.position = transform.position + new Vector3(0, 1f, 0);
+            girl.GetComponent<girl>().inside = false;   
+            jumpForce = originJumpForce;     
         }
 
         PlayerMoveKeyboard();
