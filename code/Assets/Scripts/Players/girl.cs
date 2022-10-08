@@ -34,12 +34,12 @@ public class girl : MonoBehaviour
 
     [HideInInspector]
     public bool beQuiet;
-    private int state;
+    [HideInInspector]
+    public bool inside;
 
     private bool hasCollided = false;
 
     void Awake(){
-        state = 0;
         beQuiet = false;
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -69,6 +69,10 @@ public class girl : MonoBehaviour
 
         // 小女孩不要动
         if (beQuiet){
+            return;
+        }
+        if (inside){
+            transform.position = letter.transform.position;
             return;
         }
 

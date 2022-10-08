@@ -56,6 +56,8 @@
      <Compile Include="Assets/Scripts/Players/Pingpong.cs" />
      <Compile Include="Assets/Scripts/Players/Spawner.cs" />
      <Compile Include="Assets/Scripts/Tricks/stair0_0.cs" />
+     <Compile Include="Assets/Scripts/Tricks/stair0_1.cs" />
+     <Compile Include="Assets/Scripts/Tricks/stair0_2.cs" />
      <None Include="Assets/Fonts/font info.txt" />
     <Reference Include="UnityEngine">
         <HintPath>/media/axiwa/Windows/Users/28025/Downloads/Unity/2021.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

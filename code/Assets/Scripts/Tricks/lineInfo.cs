@@ -11,6 +11,9 @@ public class lineInfo : MonoBehaviour
     // Start is called before the first frame update
     private GameObject parent;
 
+    [HideInInspector]
+    public Transform[] childrenStair;
+
     void Awake(){
         parent = transform.parent.gameObject;
     }
@@ -36,8 +39,11 @@ public class lineInfo : MonoBehaviour
         if (other.gameObject.CompareTag(TRICK_TAG)){
             // 播放音效
             // INFORM stair to play animation
-            GameObject stair = parent.transform.Find("stair").gameObject;
-            stair.GetComponent<Stair>().Move();
+            foreach (Transform child in parent.transform){ 
+                GameObject stair = child.gameObject;
+                if (stair.CompareTag("Ground"))
+                    stair.GetComponent<Stair>().Move();
+            }
         }
     }
 }

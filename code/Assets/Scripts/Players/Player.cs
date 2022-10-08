@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float originJumpForce = 20f;
+    [SerializeField]
     private float jumpForce = 20f;
 
     [HideInInspector]
@@ -58,11 +59,24 @@ public class Player : MonoBehaviour
     {
         if (girl == null){
             Debug.Log("THE GIRL IS DEAD. YOU LOST!!");
-            Destroy(gameObject);
+            // Destroy(gameObject);
         }
+
         if (Input.GetKeyDown(KeyCode.R)){
             girl.GetComponent<girl>().beQuiet = false;
         }
+
+        else if (Input.GetKeyDown(KeyCode.C) && Vector3.Distance(transform.position, girl.transform.position) < 1f && girl.GetComponent<girl>().inside == false){
+            girl.GetComponent<girl>().inside = true;
+            girl.transform.position = transform.position;
+            girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = true; 
+        }
+
+        else if (Input.GetKeyDown(KeyCode.E) && girl.GetComponent<girl>().inside == true){
+            girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = false;  
+            girl.GetComponent<girl>().inside = false;        
+        }
+
         PlayerMoveKeyboard();
         AnimatePlayer();
         PlayerJump();
@@ -93,7 +107,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded){ // GetButtonUp: once you leave the button // GetButton: you hold and it will continue to be triggered
             isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            if (girl){
+            if (girl && girl.GetComponent<girl>().inside == false){
                 girl.GetComponent<girl>().beQuiet = true;
             }           
         }
@@ -106,7 +120,8 @@ public class Player : MonoBehaviour
         hasCollided = true;
         if (other.gameObject.CompareTag(GROUND_TAG) || other.gameObject.CompareTag(TRICK_TAG)){
             isGrounded = true;
-            jumpForce = originJumpForce;
+            if (girl && girl.GetComponent<girl>().inside == false)
+                jumpForce = originJumpForce;
         }
         if (other.gameObject.CompareTag("Girl")){
             isGrounded = true;
