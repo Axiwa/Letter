@@ -41,6 +41,7 @@ public class girl : MonoBehaviour
 
     void Awake(){
         beQuiet = false;
+        inside = false;
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -72,31 +73,53 @@ public class girl : MonoBehaviour
             return;
         }
         if (inside){
-            transform.position = letter.transform.position;
+            transform.position = letter.transform.position + new Vector3(0, 1, 0);
             return;
         }
 
         // 小女孩可以动
         // 足够近，小女孩完全同步，不能跳跃，速度没有主角高
         // 如果主角正在向小女孩走，小女孩不动
-        if (Vector3.Distance(transform.position, letter.transform.position) < 2f){
+        if (Vector3.Distance(transform.position, letter.transform.position) < 6f){
             if (!letter.GetComponent<SpriteRenderer>().flipX && transform.position.x < letter.transform.position.x ||
             letter.GetComponent<SpriteRenderer>().flipX && transform.position.x > letter.transform.position.x){
                 PlayerMoveKeyboard();
                 AnimatePlayer();
             }
-
+            else{
+                movementX = 0;
+                AnimatePlayer();
+            }
         }
 
         // 小女孩跑起来跟着信
         else {
             follow();
-        }
+        }      
 
     }
 
+    void PlayerMoveKeyboard(){
+        movementX = Input.GetAxisRaw("Horizontal"); // GetAxis: not only -1 and 1
+        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
+    }
+
+    private void follow(){
+        float movementX = runForce;
+        if ((letter.transform.position.x - transform.position.x) < 0){
+            movementX = -movementX;
+        }
+        // myBody.AddForce(new Vector2(movementX, 0f), ForceMode2D.Impulse);
+        if (isGrounded){
+            isGrounded = false;      
+        }
+        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime;
+        AnimatePlayer();
+    }
+
+
     private void LateUpdate() {
-        
+  
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -147,38 +170,24 @@ public class girl : MonoBehaviour
             sr.flipX = false;
         }
     }
-    private void follow(){
-        float movementX = runForce;
-        if ((letter.transform.position.x - transform.position.x) < 0){
-            movementX = -movementX;
-        }
-        // myBody.AddForce(new Vector2(movementX, 0f), ForceMode2D.Impulse);
-        if (isGrounded){
-            isGrounded = false;      
-            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse); 
-        }
-        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime;  
-    }
 
-
-    void PlayerMoveKeyboard(){
-        movementX = Input.GetAxisRaw("Horizontal"); // GetAxis: not only -1 and 1
-        
-        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
-    }
 
     void AnimatePlayer(){
-        // if (movementX > 0){
-        //     anim.SetBool(WALK_ANIMATION, true);
-        //     sr.flipX = false;
-        // }
-        // else if (movementX < 0){
-        //     anim.SetBool(WALK_ANIMATION, true);
-        //     sr.flipX = true;
-        // }
-        // else{
-        //     anim.SetBool(WALK_ANIMATION, false);
-        // }
+        if (beQuiet){
+            anim.SetBool(WALK_ANIMATION, false);
+            return;
+        }
+        if (movementX > 0){
+            anim.SetBool(WALK_ANIMATION, true);
+            sr.flipX = false;
+        }
+        else if (movementX < 0){
+            anim.SetBool(WALK_ANIMATION, true);
+            sr.flipX = true;
+        }
+        else{
+            anim.SetBool(WALK_ANIMATION, false);
+        }
     }
 
     void PlayerJump(){

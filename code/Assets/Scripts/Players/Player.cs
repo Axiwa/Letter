@@ -68,9 +68,9 @@ public class Player : MonoBehaviour
             girl.GetComponent<girl>().beQuiet = false;
         }
 
-        else if (Input.GetKeyDown(KeyCode.C) && Vector3.Distance(transform.position, girl.transform.position) < 1f && girl.GetComponent<girl>().inside == false){
+        else if (Input.GetKeyDown(KeyCode.C) && Vector3.Distance(transform.position, girl.transform.position) < 2f && girl.GetComponent<girl>().inside == false){
             girl.GetComponent<girl>().inside = true;
-            girl.transform.position = transform.position;
+            girl.transform.position = transform.position + new Vector3(0, 1f, 0);
             jumpForce = girlForce;
             girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = true; 
             girl.GetComponent<girl>().beQuiet = false;
