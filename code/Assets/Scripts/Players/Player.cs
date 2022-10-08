@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private float originJumpForce = 20f;
     [SerializeField]
     private float jumpForce = 20f;
+    [SerializeField]
+    private float girlForce = 20f;
 
     [HideInInspector]
     public bool isGrounded = true;
@@ -69,6 +71,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.C) && Vector3.Distance(transform.position, girl.transform.position) < 1f && girl.GetComponent<girl>().inside == false){
             girl.GetComponent<girl>().inside = true;
             girl.transform.position = transform.position;
+            jumpForce = girlForce;
             girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = true; 
         }
 
