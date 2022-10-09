@@ -6,7 +6,8 @@ public class lineInfo : MonoBehaviour
 {
     public delegate void shouldMove();
     public static event shouldMove moveInfo;
-    bool hasCollided = false;
+    [HideInInspector]
+    public bool hasCollided = false;
     private string TRICK_TAG = "Stair";
     // Start is called before the first frame update
     private GameObject parent;

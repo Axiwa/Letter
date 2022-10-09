@@ -37,9 +37,11 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/Scripts/Tricks/stair0_2.cs" />
+     <Compile Include="Assets/Scripts/UI/pressE.cs" />
      <Compile Include="Assets/Scripts/UI/home.cs" />
      <Compile Include="Assets/Scripts/Players/girl.cs" />
      <Compile Include="Assets/Scripts/Environment/CameraFollow.cs" />
+     <Compile Include="Assets/Scripts/Collection/bigBonus.cs" />
      <Compile Include="Assets/Scripts/Tricks/lineInfo.cs" />
      <Compile Include="Assets/Scripts/Players/Player.cs" />
      <Compile Include="Assets/Scripts/Environment/Moon.cs" />
@@ -55,7 +57,11 @@
      <Compile Include="Assets/Scripts/UI/GameManager.cs" />
      <Compile Include="Assets/Scripts/Environment/music.cs" />
      <Compile Include="Assets/Scripts/Players/Pingpong.cs" />
+     <Compile Include="Assets/Scripts/UI/Intro/intro4.cs" />
      <Compile Include="Assets/Scripts/Tricks/stair0_1.cs" />
+     <Compile Include="Assets/Scripts/UI/Intro/intro3.cs" />
+     <Compile Include="Assets/Scripts/UI/Intro/intro1.cs" />
+     <Compile Include="Assets/Scripts/UI/Intro/intro0.cs" />
      <Compile Include="Assets/Scripts/Players/Spawner.cs" />
      <Compile Include="Assets/Scripts/Tricks/stair0_0.cs" />
      <None Include="Assets/Fonts/font info.txt" />

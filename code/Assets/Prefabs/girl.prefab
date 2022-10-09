@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 448648440}
   - component: {fileID: 448648441}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3015094112721837198}
   - component: {fileID: 2034002683}
   - component: {fileID: -2974124074637732937}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: girl
   m_TagString: Girl
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 8
-  runForce: 10
+  runForce: 4
   jumpForce: 1
   isGrounded: 1
   beQuiet: 0

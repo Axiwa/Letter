@@ -11,6 +11,8 @@ TagManager:
   - debris
   - leucocyte
   - Stair
+  - Edge
+  - popE
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - Enemy
   - ButtonGround
   - Debris
-  - 
-  - 
+  - Edge
+  - Girl
   - 
   - 
   - 
