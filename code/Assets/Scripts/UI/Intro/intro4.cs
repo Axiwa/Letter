@@ -37,7 +37,7 @@ public class intro4 : MonoBehaviour
     void Update()
     {
         if (end && text.color.a < 0.001f){
-            Destroy(gameObject);
+            end = false;
         }
         if (end){
             text.color = Color.Lerp(text.color, newColor, fadeTime * Time.deltaTime);
@@ -50,6 +50,7 @@ public class intro4 : MonoBehaviour
         }
         if (girl!=null && girl.GetComponent<girl>().inside){
             end = true;
+            begin = false;
         }        
     }
 
@@ -62,5 +63,9 @@ public class intro4 : MonoBehaviour
             girl = other.gameObject;
             begin = true;
         }          
+    }
+
+    void OnCollisionExit2D(Collision2D other) {
+        end = true;       
     }
 }

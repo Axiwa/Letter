@@ -18,7 +18,7 @@ public class girl : MonoBehaviour
     [SerializeField]
     private float jumpForce = 1f;
 
-    [HideInInspector]
+    // [HideInInspector]
     public bool isGrounded = true;
 
     private Rigidbody2D myBody;
@@ -32,9 +32,9 @@ public class girl : MonoBehaviour
     private SpriteRenderer sr;
     private float movementX = 1f;
 
-    [HideInInspector]
+    // [HideInInspector]
     public bool beQuiet;
-    [HideInInspector]
+    // [HideInInspector]
     public bool inside;
 
     private bool hasCollided = false;
@@ -53,7 +53,8 @@ public class girl : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        // PlayerJump();
+        if (inside)
+            PlayerJump();
     }
 
     // Update is called once per frame
@@ -72,18 +73,16 @@ public class girl : MonoBehaviour
         if (beQuiet){
             return;
         }
-        if (inside){
-            return;
-        }
 
         // 小女孩可以动
         // 足够近，小女孩完全同步，不能跳跃，速度没有主角高
         // 如果主角正在向小女孩走，小女孩不动
-        if (Vector3.Distance(transform.position, letter.transform.position) < 2f){
+        if (Vector3.Distance(transform.position, letter.transform.position) < 0.5f){
             if (!letter.GetComponent<SpriteRenderer>().flipX && transform.position.x < letter.transform.position.x ||
             letter.GetComponent<SpriteRenderer>().flipX && transform.position.x > letter.transform.position.x){
                 PlayerMoveKeyboard();
                 AnimatePlayer();
+                PlayerJump();
             }
             else{
                 movementX = 0;
@@ -93,7 +92,8 @@ public class girl : MonoBehaviour
 
         // 小女孩跑起来跟着信
         else {
-            follow();
+            if (letter)
+                follow();
         }      
 
     }
@@ -113,18 +113,13 @@ public class girl : MonoBehaviour
             movementX = 0;
         }
         // myBody.AddForce(new Vector2(movementX, 0f), ForceMode2D.Impulse);
-        if (isGrounded){
-            isGrounded = false;      
-        }
+
         transform.position += new Vector3(runForce * movementX, 0f, 0f) * Time.deltaTime;
         AnimatePlayer();
     }
 
 
     private void LateUpdate() {
-        if (inside){
-            transform.position = letter.transform.position + new Vector3(0, 1, 0);
-        }
         if (beQuiet){
             movementX = 0;
         }
@@ -159,6 +154,8 @@ public class girl : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.CompareTag("Edge")){
             beQuiet = true;
+            inside = false;
+            letter.GetComponent<Player>().waiting = true;
             anim.SetBool(WALK_ANIMATION, false);
         }
     }
@@ -196,11 +193,6 @@ public class girl : MonoBehaviour
 
 
     void AnimatePlayer(){
-        if (inside){
-            anim.SetBool(WALK_ANIMATION, false);
-            sr.flipX = letter.GetComponent<Player>().sr.flipX;
-            return;
-        }
         if (movementX > 0){
             anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = false;
@@ -216,6 +208,7 @@ public class girl : MonoBehaviour
 
     void PlayerJump(){
         if (Input.GetButtonDown("Jump") && isGrounded){ // GetButtonUp: once you leave the button // GetButton: you hold and it will continue to be triggered
+            Debug.Log("why!!" + jumpForce);
             isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }

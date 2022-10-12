@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
             var player = Instantiate(characters[0]);
             littlegirl.GetComponent<girl>().letter = player;
             player.GetComponent<Player>().girl = littlegirl;
+            player.transform.position = new Vector3(-6f, -3f, 0);
+            littlegirl.transform.position = new Vector3(-7f, -3f, 0);
         }
     }
 }

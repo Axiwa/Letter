@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 231401877303556453}
   - component: {fileID: 1817280617}
   - component: {fileID: 1817280624}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -159,13 +159,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ecb1b98c8cbf57f8bcdbd328810f722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 10
+  moveForce: 8
   originJumpForce: 12
-  jumpForce: 20
-  girlForce: 5
+  girlForce: 8
   isGrounded: 1
+  sr: {fileID: 0}
+  movementX: 22
   bonus: 0
   bigBonus: 0
+  waiting: 0
 --- !u!70 &1817280624
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -192,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3915895559819236830}
   - component: {fileID: 6837959832258926986}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

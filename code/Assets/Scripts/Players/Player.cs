@@ -15,10 +15,11 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float originJumpForce = 20f;
-    [SerializeField]
-    private float jumpForce = 20f;
+
     [SerializeField]
     private float girlForce = 20f;
+
+    private float jumpForce = 20f;
 
     [HideInInspector]
     public bool isGrounded = true;
@@ -33,13 +34,18 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public SpriteRenderer sr;
-    private float movementX = 22f;
+
+    [HideInInspector]
+    public float movementX = 22f;
 
     [HideInInspector]
     public int bonus = 0;
     [HideInInspector]
     public int bigBonus = 0;
     private bool hasCollided = false;
+
+    [HideInInspector]
+    public bool waiting = false;
 
 
     private void Awake(){
@@ -50,7 +56,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        waiting = false;
     }
 
     private void FixedUpdate() {
@@ -58,31 +64,34 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (girl == null){
-            Debug.Log("THE GIRL IS DEAD. YOU LOST!!");
+            // Debug.Log("THE GIRL IS DEAD. YOU LOST!!");
             // Destroy(gameObject);
         }
 
         if (Input.GetKeyDown(KeyCode.R)){
-            girl.GetComponent<girl>().beQuiet = false;
-        }
+            girl.GetComponent<girl>().beQuiet = !girl.GetComponent<girl>().beQuiet;
+            if (girl.GetComponent<girl>().beQuiet){
+                waiting = true;
+            }
+            girl.GetComponent<girl>().inside = false;
+        } 
 
-        else if (Input.GetKeyDown(KeyCode.C) && Vector3.Distance(transform.position, girl.transform.position) < 1f && girl.GetComponent<girl>().inside == false){
+        if (!girl.GetComponent<girl>().beQuiet && Vector3.Distance(transform.position, girl.transform.position) < 0.5f && girl.GetComponent<girl>().inside == false){
             girl.GetComponent<girl>().inside = true;
-            girl.transform.position = transform.position + new Vector3(0, 1f, 0);
+            // 建立连接，可能有动画
             jumpForce = girlForce;
-            girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = true; 
-            girl.GetComponent<girl>().beQuiet = false;
+            waiting = false;
+            // girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = true; 
         }
 
-        else if (Input.GetKeyDown(KeyCode.C) && girl.GetComponent<girl>().inside == true){
-            girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = false;  
-            girl.transform.position = transform.position + new Vector3(0, 1f, 0);
-            girl.GetComponent<girl>().inside = false;   
-            jumpForce = originJumpForce;     
-        }
+        // else if (Vector3.Distance(transform.position, girl.transform.position) > 1f && girl.GetComponent<girl>().inside == true){
+        //     // girl.GetComponent<girl>().GetComponent<Collider2D>().isTrigger = false;  
+        //     girl.GetComponent<girl>().inside = false;
+        //     waiting = true;
+        //     jumpForce = originJumpForce;     
+        // }
 
         PlayerMoveKeyboard();
         AnimatePlayer();
@@ -113,10 +122,10 @@ public class Player : MonoBehaviour
     void PlayerJump(){
         if (Input.GetButtonDown("Jump") && isGrounded){ // GetButtonUp: once you leave the button // GetButton: you hold and it will continue to be triggered
             isGrounded = false;
-            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            if (girl && girl.GetComponent<girl>().inside == false){
-                girl.GetComponent<girl>().beQuiet = true;
-            }           
+            if (!waiting)
+                myBody.AddForce(new Vector2(0f, girlForce), ForceMode2D.Impulse);
+            else
+                myBody.AddForce(new Vector2(0f, originJumpForce), ForceMode2D.Impulse);          
         }
     }
 

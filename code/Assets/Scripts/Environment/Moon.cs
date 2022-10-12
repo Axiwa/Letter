@@ -12,8 +12,8 @@ public class Moon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.FindWithTag("Player")){
-            player = GameObject.FindWithTag("Player").transform;
+        if (GameObject.FindWithTag("MainCamera")){
+            player = GameObject.FindWithTag("MainCamera").transform;
         }
     }
 
