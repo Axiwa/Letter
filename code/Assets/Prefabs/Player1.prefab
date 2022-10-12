@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 8
-  originJumpForce: 12
-  girlForce: 8
+  originJumpForce: 14
+  girlForce: 9
   isGrounded: 1
   sr: {fileID: 0}
   movementX: 22

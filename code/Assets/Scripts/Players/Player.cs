@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             girl.GetComponent<girl>().inside = false;
         } 
 
-        if (!girl.GetComponent<girl>().beQuiet && Vector3.Distance(transform.position, girl.transform.position) < 0.5f && girl.GetComponent<girl>().inside == false){
+        if (!girl.GetComponent<girl>().beQuiet && Vector3.Distance(transform.position, girl.transform.position) < 1f && girl.GetComponent<girl>().inside == false){
             girl.GetComponent<girl>().inside = true;
             // 建立连接，可能有动画
             jumpForce = girlForce;

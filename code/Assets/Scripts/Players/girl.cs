@@ -77,7 +77,7 @@ public class girl : MonoBehaviour
         // 小女孩可以动
         // 足够近，小女孩完全同步，不能跳跃，速度没有主角高
         // 如果主角正在向小女孩走，小女孩不动
-        if (Vector3.Distance(transform.position, letter.transform.position) < 0.5f){
+        if (Vector3.Distance(transform.position, letter.transform.position) < 1f){
             if (!letter.GetComponent<SpriteRenderer>().flipX && transform.position.x < letter.transform.position.x ||
             letter.GetComponent<SpriteRenderer>().flipX && transform.position.x > letter.transform.position.x){
                 PlayerMoveKeyboard();
