@@ -47,6 +47,9 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool waiting = false;
 
+    [HideInInspector]
+    public bool safe = false;    
+
 
     private void Awake(){
         myBody = GetComponent<Rigidbody2D>();
@@ -71,11 +74,16 @@ public class Player : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.R)){
-            girl.GetComponent<girl>().beQuiet = !girl.GetComponent<girl>().beQuiet;
-            if (girl.GetComponent<girl>().beQuiet){
-                waiting = true;
+            if (safe){
+                girl.GetComponent<girl>().beQuiet = !girl.GetComponent<girl>().beQuiet;
+                if (girl.GetComponent<girl>().beQuiet){
+                    waiting = true;
+                }
+                girl.GetComponent<girl>().inside = false;
             }
-            girl.GetComponent<girl>().inside = false;
+            else{
+                girl.GetComponent<girl>().complain();
+            }
         } 
 
         if (!girl.GetComponent<girl>().beQuiet && Vector3.Distance(transform.position, girl.transform.position) < 1f && girl.GetComponent<girl>().inside == false){

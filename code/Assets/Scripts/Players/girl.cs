@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class girl : MonoBehaviour
 {
@@ -32,12 +33,18 @@ public class girl : MonoBehaviour
     private SpriteRenderer sr;
     private float movementX = 1f;
 
-    // [HideInInspector]
+    [HideInInspector]
     public bool beQuiet;
-    // [HideInInspector]
+    [HideInInspector]
     public bool inside;
 
+    [HideInInspector]
+    public bool safe = false; 
+
     private bool hasCollided = false;
+
+    [SerializeField]
+    private GameObject complaint;
 
     void Awake(){
         beQuiet = false;
@@ -50,6 +57,9 @@ public class girl : MonoBehaviour
     {
         if (letter)
             transform.position = letter.transform.position;
+        if (complaint == null){
+            complaint = GameObject.FindWithTag("complaint");
+        }
     }
 
     private void FixedUpdate() {
@@ -208,10 +218,13 @@ public class girl : MonoBehaviour
 
     void PlayerJump(){
         if (Input.GetButtonDown("Jump") && isGrounded){ // GetButtonUp: once you leave the button // GetButton: you hold and it will continue to be triggered
-            Debug.Log("why!!" + jumpForce);
             isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
+    }
+
+    public void complain(){
+        complaint.GetComponent<Text>().color = new Color(0.5566f, 0.5566f, 0.5566f, 0.8f);
     }
 
     float abs(float a){

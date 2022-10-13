@@ -28,9 +28,6 @@ public class intro4 : MonoBehaviour
         oldColor = new Color(0.5566f, 0.5566f, 0.5566f, 0.8f);
         newColor = new Color(text.color.r, text.color.g, text.color.b, 0); 
         girl = GameObject.FindWithTag("Girl"); 
-        if (girl != null){
-            Debug.Log(girl.name);
-        }
     }
 
     // Update is called once per frame

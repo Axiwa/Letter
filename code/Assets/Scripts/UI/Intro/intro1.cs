@@ -13,6 +13,7 @@ public class intro1 : MonoBehaviour
 
     [SerializeField]
     private GameObject monster;
+    private GameObject player;
 
     float fadeTime = 1.5f;
     void Start()
@@ -22,19 +23,24 @@ public class intro1 : MonoBehaviour
         text = gameObject.GetComponent<Text>();
         oldColor = new Color(0.5566f, 0.5566f, 0.5566f, 1);
         newColor = new Color(text.color.r, text.color.g, text.color.b, 0);
+
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (end){
+        if (!player){
+            return;
+        }
+        if (begin && end){
             text.color = Color.Lerp(text.color, newColor, fadeTime * Time.deltaTime);
             return;
         }
-        else if (begin){
+        if (begin){
             text.color = Color.Lerp(text.color, oldColor, fadeTime * Time.deltaTime);
         }
-        if (!monster){
+        if (monster && Vector3.Distance(monster.transform.position, player.transform.position) < 4){
             begin = true;
         }
         if (!monster && Input.GetKey(KeyCode.R)){

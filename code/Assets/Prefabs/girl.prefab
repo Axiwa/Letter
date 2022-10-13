@@ -255,6 +255,8 @@ MonoBehaviour:
   isGrounded: 1
   beQuiet: 0
   inside: 0
+  safe: 0
+  complaint: {fileID: 0}
 --- !u!95 &-2974124074637732937
 Animator:
   serializedVersion: 4
