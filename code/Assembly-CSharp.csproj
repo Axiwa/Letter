@@ -59,6 +59,7 @@
      <Compile Include="Assets/Scripts/Players/followSpawner.cs" />
      <Compile Include="Assets/Scripts/Environment/music.cs" />
      <Compile Include="Assets/Scripts/Players/Pingpong.cs" />
+     <Compile Include="Assets/Scripts/Manager/deathZone.cs" />
      <Compile Include="Assets/Scripts/UI/Intro/intro4.cs" />
      <Compile Include="Assets/Scripts/Tricks/stair0_1.cs" />
      <Compile Include="Assets/Scripts/UI/Intro/intro3.cs" />
@@ -68,7 +69,6 @@
      <Compile Include="Assets/Scripts/Players/Spawner.cs" />
      <Compile Include="Assets/Scripts/Players/followMonster.cs" />
      <Compile Include="Assets/Scripts/Tricks/stair0_0.cs" />
-     <Compile Include="Assets/Scripts/Manager/deathZone.cs" />
      <None Include="Assets/Fonts/font info.txt" />
     <Reference Include="UnityEngine">
         <HintPath>/media/axiwa/Windows/Users/28025/Downloads/Unity/2021.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

@@ -70,6 +70,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (girl == null){
+            girl = GameObject.FindWithTag("Girl");
+        }
         waiting = false;
         positionList.Add(transform.position);
     }
@@ -87,6 +90,10 @@ public class Player : MonoBehaviour
         if (girl == null){
             // Debug.Log("THE GIRL IS DEAD. YOU LOST!!");
             // Destroy(gameObject);
+            PlayerMoveKeyboard();
+            AnimatePlayer();
+            PlayerJump();
+            return;
         }
 
         if (Input.GetKeyDown(KeyCode.R)){
