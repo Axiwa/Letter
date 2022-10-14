@@ -92,7 +92,8 @@ public class CameraFollow : MonoBehaviour {
         }
         else if (player.transform.position.y < transform.position.y - height){
             targetY = player.transform.position.y - Aheady;
-            aheady = -Aheady;
+            // 如果想做出朝下的效果，这里改成-Aheady
+            aheady = Aheady;
             transition = true;
         }
         else{

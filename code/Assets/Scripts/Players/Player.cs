@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
     private GameObject _girl;
     public GameObject girl{
         get {return _girl;}
         set {_girl = value;}
     }
+
+    public List<Vector3> positionList;
+    int distance = 5;
+    public float connectDistance = 1f;
 
     [SerializeField]
     private float moveForce = 10f;
@@ -19,9 +24,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float girlForce = 20f;
 
+    [SerializeField]
     private float jumpForce = 20f;
 
-    [HideInInspector]
+    // [HideInInspector]
     public bool isGrounded = true;
 
     private Rigidbody2D myBody;
@@ -43,6 +49,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public int bigBonus = 0;
     private bool hasCollided = false;
+    private bool hasTrigger = false;
 
     [HideInInspector]
     public bool waiting = false;
@@ -50,20 +57,29 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool safe = false;    
 
+    [HideInInspector]
+    public Vector3 rebirth;
+
 
     private void Awake(){
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        rebirth = new Vector3(0, 0, 233);
     }
     // Start is called before the first frame update
     void Start()
     {
         waiting = false;
+        positionList.Add(transform.position);
     }
 
     private void FixedUpdate() {
         PlayerJump();
+        positionList.Add(transform.position);
+        if (positionList.Count > distance){
+            positionList.RemoveAt(0);
+        }
     }
 
     // Update is called once per frame
@@ -86,7 +102,7 @@ public class Player : MonoBehaviour
             }
         } 
 
-        if (!girl.GetComponent<girl>().beQuiet && Vector3.Distance(transform.position, girl.transform.position) < 1f && girl.GetComponent<girl>().inside == false){
+        if (!girl.GetComponent<girl>().beQuiet && Vector3.Distance(transform.position, girl.transform.position) < connectDistance && girl.GetComponent<girl>().inside == false){
             girl.GetComponent<girl>().inside = true;
             // 建立连接，可能有动画
             jumpForce = girlForce;
@@ -138,19 +154,17 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (hasCollided){
-            return;
-        }
-        hasCollided = true;
         if (other.gameObject.CompareTag(GROUND_TAG) || other.gameObject.CompareTag(TRICK_TAG)){
             isGrounded = true;
             if (girl && girl.GetComponent<girl>().inside == false)
                 jumpForce = originJumpForce;
         }
-        if (other.gameObject.CompareTag("Girl")){
-            isGrounded = true;
-            jumpForce = 8f;
+
+        if (hasCollided){
+            return;
         }
+        hasCollided = true;
+
         if (other.gameObject.CompareTag(ENEMY_TAG)){
             var player = GetComponent<Collider2D>();
             var extents = player.bounds.extents.y;
@@ -162,7 +176,9 @@ public class Player : MonoBehaviour
                 myBody.AddForce(new Vector2(0f, 3f), ForceMode2D.Impulse);
             }
             else{
-                Destroy(gameObject);
+                isGrounded = true;    
+                re();      
+                return;    
             }
         }
         if (other.gameObject.CompareTag("debris")){
@@ -177,10 +193,10 @@ public class Player : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (hasCollided){
+        if (hasTrigger){
             return;
         }
-        hasCollided = true;
+        hasTrigger = true;
         if (other.CompareTag(ENEMY_TAG)){
             var player = GetComponent<Collider2D>();
             var extents = player.bounds.extents.y;
@@ -192,10 +208,12 @@ public class Player : MonoBehaviour
                 myBody.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
             }
             else{
-                Destroy(gameObject);
+                isGrounded = true;
+                re();
+                return;
             }
         }
-        if (other.gameObject.CompareTag("debris")){
+        if (other.gameObject.CompareTag("debris") && !other.GetComponent<bonus>().hasTrigger){
             // 信封动画
             Debug.Log("Happy!");
             bonus++;
@@ -206,7 +224,20 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void re(){
+        if (rebirth.z < 200){
+            transform.position = rebirth;
+            girl.transform.position = rebirth;
+            girl.GetComponent<girl>().inside = true;
+            girl.GetComponent<girl>().beQuiet = false;
+        }
+        else{
+            Destroy(gameObject);
+        }
+    }
+
     private void LateUpdate() {
         hasCollided = false;
+        hasTrigger = false;
     }
 }

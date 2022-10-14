@@ -10,8 +10,8 @@ public class bigBonus : MonoBehaviour
     [SerializeField]
     private float velocity = 1f;
 
-    [SerializeField]
-    private GameObject info;
+    // [SerializeField]
+    // private GameObject info;
 
     private Animator anim;
     private SpriteRenderer sr;

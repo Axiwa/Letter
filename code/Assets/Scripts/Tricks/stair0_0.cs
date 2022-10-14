@@ -9,7 +9,9 @@ public class stair0_0 : Stair
     [SerializeField]
     Vector3 target;
     [SerializeField]
-    float speed = 5;
+    float speed = 1.5f;
+
+    private bool begin = false;
 
     void Awake(){
         start = transform.position;
@@ -22,11 +24,13 @@ public class stair0_0 : Stair
 
     // Update is called once per frame
     void Update(){
-        
+        if (begin){
+            transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
+        }
     }
 
     public override void Move() {
-        transform.position = target;
+        begin = true;
     }
 
 }

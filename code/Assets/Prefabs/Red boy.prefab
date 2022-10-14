@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4414369712151985315}
   - component: {fileID: 4414369712151985324}
   - component: {fileID: 5712341582356304086}
-  - component: {fileID: 1640104971}
+  - component: {fileID: -7229827137431239610}
   m_Layer: 6
   m_Name: Red boy
   m_TagString: Enemy
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 4414369712151985326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.26, y: -3.11, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -145,7 +145,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.17614841, y: 0}
   m_Size: {x: 0.8269825, y: 2.11}
   m_Direction: 0
---- !u!114 &1640104971
+--- !u!114 &-7229827137431239610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4414369712151985326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187ad733a3fcb36b784797ba9bc8a6b8, type: 3}
+  m_Script: {fileID: 11500000, guid: a916772ead3f00cab9ad76cba97d3919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0

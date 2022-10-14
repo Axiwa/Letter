@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class girl : MonoBehaviour
 {
+    [SerializeField]
     private GameObject _letter;
     public GameObject letter{
         get {return _letter;}
@@ -87,7 +88,7 @@ public class girl : MonoBehaviour
         // 小女孩可以动
         // 足够近，小女孩完全同步，不能跳跃，速度没有主角高
         // 如果主角正在向小女孩走，小女孩不动
-        if (Vector3.Distance(transform.position, letter.transform.position) < 1f){
+        if (Vector3.Distance(transform.position, letter.transform.position) < letter.GetComponent<Player>().connectDistance){
             if (!letter.GetComponent<SpriteRenderer>().flipX && transform.position.x < letter.transform.position.x ||
             letter.GetComponent<SpriteRenderer>().flipX && transform.position.x > letter.transform.position.x){
                 PlayerMoveKeyboard();
@@ -122,9 +123,9 @@ public class girl : MonoBehaviour
         {
             movementX = 0;
         }
-        // myBody.AddForce(new Vector2(movementX, 0f), ForceMode2D.Impulse);
 
-        transform.position += new Vector3(runForce * movementX, 0f, 0f) * Time.deltaTime;
+        Vector3 newPosition = new Vector3(letter.GetComponent<Player>().positionList[0].x, letter.GetComponent<Player>().positionList[0].y - 0.16f, letter.GetComponent<Player>().positionList[0].z);
+        transform.position = Vector3.Lerp(transform.position, newPosition, 20 * Time.deltaTime);// new Vector3(runForce * movementX, 0f, 0f) * Time.deltaTime;
         AnimatePlayer();
     }
 
