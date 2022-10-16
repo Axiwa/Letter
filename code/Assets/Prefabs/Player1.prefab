@@ -159,19 +159,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ecb1b98c8cbf57f8bcdbd328810f722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _girl: {fileID: 0}
+  girl: {fileID: 0}
   positionList: []
   connectDistance: 1
+  jumpForce: 14
+  linkedState: 0
+  safe: 0
   moveForce: 8
-  originJumpForce: 14
-  girlForce: 9
   isGrounded: 1
-  sr: {fileID: 0}
   movementX: 22
+  sr: {fileID: 0}
   bonus: 0
   bigBonus: 0
-  waiting: 0
-  safe: 0
+  rebirth: {x: 0, y: 0, z: 0}
 --- !u!70 &1817280624
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class bonusCount : MonoBehaviour
     }
 
     void Start(){
-        letter = GameObject.FindWithTag("Player");
+        letter = GameObject.FindWithTag("Boss");
         text = GetComponent<Text>();
     }
 
@@ -26,6 +26,6 @@ public class bonusCount : MonoBehaviour
 
     public void textChange(){
         if (text != null && letter != null)
-            text.text = letter.GetComponent<Player>().bonus.ToString();
+            text.text = letter.GetComponent<Boss>().health.ToString();
     }
 }

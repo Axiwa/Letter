@@ -10,7 +10,7 @@ public class t0 : MonoBehaviour
     private void Update() {
         if (Input.anyKeyDown){
             animator.SetBool("totrans", false);
-            SceneManager.LoadScene("1");
+            SceneManager.LoadScene("3");
         }
     }
     private void Awake(){
@@ -21,6 +21,6 @@ public class t0 : MonoBehaviour
     }
 
     public void OnFadeComplete(){
-        SceneManager.LoadScene("1");
+        SceneManager.LoadScene("3");
     }
 }

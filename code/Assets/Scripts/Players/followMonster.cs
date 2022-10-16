@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class followMonster : MonoBehaviour
 {
-    [HideInInspector]
-    public float speed;
+    public float speed = 2f;
 
     private GameObject letter;
     private Animator anim;
@@ -22,6 +21,7 @@ public class followMonster : MonoBehaviour
     void Start()
     {
         letter = GameObject.FindWithTag("Player");
+        speed = Random.Range(1, 2);
     }
 
     // Update is called once per frame

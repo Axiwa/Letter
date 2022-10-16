@@ -33,7 +33,7 @@ public class bonus : MonoBehaviour
         letter = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();     
-        offset = new Vector3(Random.Range(-1.5f,1.5f), Random.Range(-1.5f,1.5f), Random.Range(-1.5f,1.5f));
+        offset = new Vector3(Random.Range(-1.5f,1.5f), Random.Range(-0.5f,1.5f), 0);
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class bonus : MonoBehaviour
         }
         if (hasTrigger){
             if (count > 360){
-                offset = new Vector3(Random.Range(-1.5f,1.5f), Random.Range(-1.5f,1.5f), Random.Range(-1.5f,1.5f));
+                offset = new Vector3(Random.Range(-1.5f,1.5f), Random.Range(-0.5f,1.5f), 0);
                 count = 0;
             }
             count++;
@@ -58,7 +58,7 @@ public class bonus : MonoBehaviour
         if (hasTrigger){
             return;
         }
-        if (other.CompareTag("Player")){
+        if (other.CompareTag("Player") && other.gameObject.GetComponent<Player>().linkedState == 0){
             // 向玩家移动，在到达之前不会消失，透明度下降
             hasTrigger = true;
             if (info == null){

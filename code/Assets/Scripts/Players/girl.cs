@@ -5,55 +5,58 @@ using UnityEngine.UI;
 
 public class girl : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _letter;
-    public GameObject letter{
-        get {return _letter;}
-        set {_letter = value;}
-    }
+    public GameObject letter;
+
+    /* ----------------- Move and Jump --------------------- */
 
     [SerializeField]
-    private float moveForce = 6f;
-    [SerializeField]
-    private float runForce = 6f;
+    private float moveForce = 5f;
 
-    [SerializeField]
-    private float jumpForce = 1f;
+    public float jumpForce = 8f;
 
-    // [HideInInspector]
+    private float movementX = 1f;
+
+    [HideInInspector]
     public bool isGrounded = true;
+
+    private bool hasCollided = false;
 
     private Rigidbody2D myBody;
     private Animator anim;
+    private SpriteRenderer sr;
 
+    /* ------------------------------------------------------- */
     private string WALK_ANIMATION = "Walk";
     private string GROUND_TAG = "Ground";
     private string ENEMY_TAG = "Enemy";
     private string TRICK_TAG = "Stair";
 
-    private SpriteRenderer sr;
-    private float movementX = 1f;
+    
+    /* ----- Related to letter -------------------------------- */
+
+    [SerializeField]
+    private float runForce = 10f; // the speed for chasing letter
 
     [HideInInspector]
-    public bool beQuiet;
-    [HideInInspector]
-    public bool inside;
+    public bool beQuiet; // stay inside the light
 
     [HideInInspector]
-    public bool safe = false; 
+    public bool inside; // inmitating the letter
 
-    private bool hasCollided = false;
+    [HideInInspector]
+    public bool safe = false; // determine if I am inside the light
 
     [SerializeField]
     private GameObject complaint;
 
     void Awake(){
         beQuiet = false;
-        inside = false;
+        inside = true;
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
+    
     void Start()
     {
         if (letter)
@@ -73,6 +76,7 @@ public class girl : MonoBehaviour
     {
         if (!letter){
             // 主角g了，小女孩哭泣动画，结束游戏
+            anim.SetTrigger("cry"); 
             Destroy(gameObject);
             return;
         }
@@ -86,15 +90,17 @@ public class girl : MonoBehaviour
         }
 
         // 小女孩可以动
-        // 足够近，小女孩完全同步，不能跳跃，速度没有主角高
-        // 如果主角正在向小女孩走，小女孩不动
-        if (Vector3.Distance(transform.position, letter.transform.position) < letter.GetComponent<Player>().connectDistance){
+
+        // 0.1f is for tolerance
+        if (Vector3.Distance(transform.position, letter.transform.position) < letter.GetComponent<Player>().connectDistance + 0.1f){
+            // The letter is running to the opposite direction of the girl
             if (!letter.GetComponent<SpriteRenderer>().flipX && transform.position.x < letter.transform.position.x ||
             letter.GetComponent<SpriteRenderer>().flipX && transform.position.x > letter.transform.position.x){
                 PlayerMoveKeyboard();
                 AnimatePlayer();
                 PlayerJump();
             }
+            // 如果主角正在向小女孩走，小女孩不动
             else{
                 movementX = 0;
                 AnimatePlayer();
@@ -123,10 +129,18 @@ public class girl : MonoBehaviour
         {
             movementX = 0;
         }
-
-        Vector3 newPosition = new Vector3(letter.GetComponent<Player>().positionList[0].x, letter.GetComponent<Player>().positionList[0].y - 0.16f, letter.GetComponent<Player>().positionList[0].z);
-        transform.position = Vector3.Lerp(transform.position, newPosition, 20 * Time.deltaTime);// new Vector3(runForce * movementX, 0f, 0f) * Time.deltaTime;
         AnimatePlayer();
+        
+        // The letter is waiting
+        if (letter.GetComponent<Player>().linkedState == 1){
+            transform.position += new Vector3(moveForce * movementX, 0f, 0f) * Time.deltaTime;            
+        }
+        else{
+            Vector3 newPosition = new Vector3(letter.GetComponent<Player>().positionList[0].x, letter.GetComponent<Player>().positionList[0].y - 0.16f, letter.GetComponent<Player>().positionList[0].z);
+            transform.position = Vector3.Lerp(transform.position, newPosition, 20 * Time.deltaTime);
+        }
+
+        
     }
 
 
@@ -163,12 +177,7 @@ public class girl : MonoBehaviour
     }
 
     private void OnCollisionStay2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Edge")){
-            beQuiet = true;
-            inside = false;
-            letter.GetComponent<Player>().waiting = true;
-            anim.SetBool(WALK_ANIMATION, false);
-        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

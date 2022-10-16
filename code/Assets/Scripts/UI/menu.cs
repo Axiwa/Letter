@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class menu : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class menu : MonoBehaviour
     float cursorPosition;
     bool catchCursor = true;
     float visibleCursorTimer = 3f;
+    Color tmp;
+
+    void Start(){
+        tmp = gameObject.GetComponent<Image>().color;
+    }
 
     void LateUpdate()
     {
@@ -19,13 +25,15 @@ public class menu : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if ( timeLeft < 0 ){                
                 timeLeft = visibleCursorTimer;
-                gameObject.GetComponent<CanvasGroup>().alpha = 0;
+                tmp.a = 0f;
+                gameObject.GetComponent<Image>().color = tmp;
                 catchCursor=true;
             }
         }
         else{
             timeLeft = visibleCursorTimer;
-            gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            tmp.a = 1f;
+            gameObject.GetComponent<Image>().color = tmp;
         }            
     }
 }

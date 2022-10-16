@@ -51,6 +51,9 @@ public class CameraFollow : MonoBehaviour {
         else if (player.movementX < 0){
             targetX = player.transform.position.x + Aheadx;
         }
+        else{
+            targetX = player.transform.position.x + Aheadx;
+        }
 
         if (Targetpos.y < minY){
             Targetpos.y = minY;

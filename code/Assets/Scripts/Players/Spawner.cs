@@ -23,9 +23,8 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnMonsters(){
         while (true){
-            yield return new WaitForSeconds(Random.Range(1,5));
+            yield return new WaitForSeconds(Random.Range(5, 6));
             randomIndex = Random.Range(0, monsterReference.Length);
-            // randomSide = Random.Range(0, 2);
             randomSide = 1;
 
             spawnedMonster = Instantiate(monsterReference[randomIndex]);
@@ -34,11 +33,12 @@ public class Spawner : MonoBehaviour
             if (randomSide == 0){
                 spawnedMonster.transform.position = leftPos.position;
                 spawnedMonster.GetComponent<Monster>().speed = Random.Range(4, 10);
+                spawnedMonster.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
             }
             else{
                 spawnedMonster.transform.position = rightPos.position;
                 spawnedMonster.GetComponent<Monster>().speed = -Random.Range(3, 6);
-                spawnedMonster.transform.localScale = new Vector3(-1f, 1f, 1f);
+                spawnedMonster.transform.localScale = new Vector3(-0.6f, 0.6f, 1f);
             }            
         } // while
     }

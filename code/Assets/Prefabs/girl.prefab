@@ -249,11 +249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961eb705120f82b86a2733fcfc686f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _letter: {fileID: 0}
-  moveForce: 6
-  runForce: 8
+  letter: {fileID: 0}
+  moveForce: 3
   jumpForce: 9
   isGrounded: 1
+  runForce: 8
   beQuiet: 0
   inside: 0
   safe: 0
