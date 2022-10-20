@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 778213670308821232}
   - component: {fileID: 231401877303556453}
   - component: {fileID: 1817280617}
-  - component: {fileID: 1817280624}
   m_Layer: 11
   m_Name: Player1
   m_TagString: Player
@@ -79,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: -711439249
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 339333599, guid: a29fea8b2fb293ec799921a5273add12, type: 3}
+  m_Sprite: {fileID: 1254150817, guid: 19c49d91337e8bd51b14804915d24a7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.02, y: 2.22}
+  m_Size: {x: 1.6, y: 2.19}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -144,8 +143,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011143583, y: -1.0719717e-12}
-  m_Size: {x: 0.76367724, y: 2.22}
+  m_Offset: {x: 0.006358066, y: 0.14906342}
+  m_Size: {x: 1.5250185, y: 1.9218643}
   m_Direction: 0
 --- !u!114 &1817280617
 MonoBehaviour:
@@ -172,22 +171,6 @@ MonoBehaviour:
   bonus: 0
   bigBonus: 0
   rebirth: {x: 0, y: 0, z: 0}
---- !u!70 &1817280624
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5112713901380464310}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.0200001, y: 2.22}
-  m_Direction: 0
 --- !u!1 &5914371708161671546
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class followSpawner : MonoBehaviour
         while (true){
             yield return new WaitForSeconds(Random.Range(1, 5));
             letter = GameObject.FindWithTag("Player");
-            if (spawnedMonster == null && Vector3.Distance(letter.transform.position, transform.position) < 5f & abs(letter.transform.position.y - transform.position.y) < 1f){
+            if (spawnedMonster == null && Vector3.Distance(letter.transform.position, transform.position) < 5f & abs(letter.transform.position.y - transform.position.y) < 2f){
                 randomIndex = Random.Range(0, monsterReference.Length);
 
                 spawnedMonster = Instantiate(monsterReference[0]);

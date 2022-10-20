@@ -31,10 +31,10 @@ public class followMonster : MonoBehaviour
             return;
         }
         if (letter.transform.position.x - transform.position.x > 0){
-            transform.localScale = new Vector3(scale, scale, scale);
+            transform.localScale = new Vector3(-scale, scale, scale);
         }
         else{
-            transform.localScale = new Vector3(-scale, scale, scale);
+            transform.localScale = new Vector3(scale, scale, scale);
         }
 
         if (Vector3.Distance(letter.transform.position, transform.position) < 5f & abs(letter.transform.position.y - transform.position.y) < 2f){

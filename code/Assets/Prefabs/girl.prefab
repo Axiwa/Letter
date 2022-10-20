@@ -234,8 +234,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0048646927, y: 0.087540984}
-  m_Size: {x: 0.9629259, y: 2.0472257}
+  m_Offset: {x: 0.036806718, y: -0.35325143}
+  m_Size: {x: 0.63073343, y: 1.0634319}
   m_Direction: 0
 --- !u!114 &2034002683
 MonoBehaviour:
@@ -250,12 +250,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letter: {fileID: 0}
-  moveForce: 3
+  moveForce: 6
   jumpForce: 9
-  isGrounded: 1
+  isGrounded: 0
   runForce: 8
   beQuiet: 0
   inside: 0
+  diffh: 0.8
   safe: 0
   complaint: {fileID: 0}
 --- !u!95 &-2974124074637732937

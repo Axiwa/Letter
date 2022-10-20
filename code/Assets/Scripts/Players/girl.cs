@@ -16,7 +16,7 @@ public class girl : MonoBehaviour
 
     private float movementX = 1f;
 
-    [HideInInspector]
+    // [HideInInspector]
     public bool isGrounded = true;
 
     private bool hasCollided = false;
@@ -44,6 +44,9 @@ public class girl : MonoBehaviour
     public bool inside; // inmitating the letter
 
     [HideInInspector]
+    public float diffh = 0.2f;
+
+    [HideInInspector]
     public bool safe = false; // determine if I am inside the light
 
     [SerializeField]
@@ -67,6 +70,9 @@ public class girl : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if (!beQuiet && letter.GetComponent<Player>().isGrounded && letter.transform.position.y >= transform.position.y + diffh){
+            return;
+        }    
         if (inside)
             PlayerJump();
     }
@@ -84,6 +90,11 @@ public class girl : MonoBehaviour
         // 方向朝着主角
         changeDir();
 
+
+        if (letter.GetComponent<Player>().isGrounded && letter.transform.position.y >= transform.position.y + diffh){
+            return;
+        }  
+
         // 小女孩不要动
         if (beQuiet){
             return;
@@ -92,7 +103,7 @@ public class girl : MonoBehaviour
         // 小女孩可以动
 
         // 0.1f is for tolerance
-        if (Vector3.Distance(transform.position, letter.transform.position) < letter.GetComponent<Player>().connectDistance + 0.1f){
+        if (Vector3.Distance(transform.position, letter.transform.position) < letter.GetComponent<Player>().connectDistance-0.3f){
             // The letter is running to the opposite direction of the girl
             if (!letter.GetComponent<SpriteRenderer>().flipX && transform.position.x < letter.transform.position.x ||
             letter.GetComponent<SpriteRenderer>().flipX && transform.position.x > letter.transform.position.x){
@@ -111,7 +122,7 @@ public class girl : MonoBehaviour
         else {
             if (letter)
                 follow();
-        }      
+        }  
 
     }
 
@@ -121,6 +132,12 @@ public class girl : MonoBehaviour
     }
 
     private void follow(){
+        Debug.Log(letter.transform.position.y - transform.position.y);
+        Debug.Log(letter.GetComponent<Player>().isGrounded);
+        if (letter.GetComponent<Player>().isGrounded && letter.transform.position.y >= transform.position.y + diffh){
+            return;
+        }  
+
         movementX = 1;
         if ((letter.transform.position.x - transform.position.x) < 0){
             movementX = -1;
@@ -136,7 +153,7 @@ public class girl : MonoBehaviour
             transform.position += new Vector3(moveForce * movementX, 0f, 0f) * Time.deltaTime;            
         }
         else{
-            Vector3 newPosition = new Vector3(letter.GetComponent<Player>().positionList[0].x, letter.GetComponent<Player>().positionList[0].y - 0.16f, letter.GetComponent<Player>().positionList[0].z);
+            Vector3 newPosition = new Vector3(letter.GetComponent<Player>().positionList[0].x, letter.GetComponent<Player>().positionList[0].y - 0.024f, letter.GetComponent<Player>().positionList[0].z);
             transform.position = Vector3.Lerp(transform.position, newPosition, 20 * Time.deltaTime);
         }
 
@@ -145,18 +162,19 @@ public class girl : MonoBehaviour
 
 
     private void LateUpdate() {
+        if (!beQuiet && letter.GetComponent<Player>().isGrounded && letter.transform.position.y >= transform.position.y + diffh){
+            return;
+        }   
         if (beQuiet){
             movementX = 0;
+            AnimatePlayer();
+            return;
         }
-        AnimatePlayer();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag(GROUND_TAG)){
             isGrounded = true;
-        }
-        if (other.gameObject.CompareTag("Edge")){
-            beQuiet = true;
         }
         if (other.gameObject.CompareTag(ENEMY_TAG)){
             var player = GetComponent<Collider2D>();
@@ -170,8 +188,8 @@ public class girl : MonoBehaviour
             }
             else{
                 // 小女孩G了，信的光芒逐渐减弱，信消失，游戏结束
-                Destroy(gameObject);
-                Debug.Log("YOU LOST!!! ");
+                letter.GetComponent<Player>().re();
+                return;
             }
         }
     }
@@ -192,8 +210,8 @@ public class girl : MonoBehaviour
                 myBody.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
             }
             else{
-                Destroy(gameObject);
-                Debug.Log("YOU LOST!!! ");
+                letter.GetComponent<Player>().re();
+                return;
             }
         }
     }

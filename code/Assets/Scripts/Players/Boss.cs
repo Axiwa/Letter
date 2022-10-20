@@ -69,7 +69,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator SpawnMonsters(){
         while (true){
-            yield return new WaitForSeconds(Random.Range(3, 5));
+            yield return new WaitForSeconds(Random.Range(5, 10));
             randomIndex = Random.Range(0, monsterReference.Length);
 
             spawnedMonster = Instantiate(monsterReference[randomIndex]);

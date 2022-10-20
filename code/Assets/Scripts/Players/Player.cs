@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public List<Vector3> positionList;
     int distance = 5; 
 
-    public float connectDistance = 1f;
+    public float connectDistance = 0.6f;
 
     private float girlForce = 9f;
 
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private float jumpForce = 20f;
 
     // linkedState: 0-linked; 1-waiting & girl is not quiet; 2-totally depart
-    [HideInInspector]
+    // [HideInInspector]
     public int linkedState = 0;
 
     [HideInInspector]
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         // Determine the state when press R
         if (Input.GetKeyDown(KeyCode.R)){
             // If I am inside the safe zone, girl's @beQuiet is flipped
-            if (safe){
+            if (safe && Vector3.Distance(transform.position, girl.transform.position) < 1f){
                 girl.GetComponent<girl>().beQuiet = !girl.GetComponent<girl>().beQuiet;
 
                 // If the girl can follow me now, I am waiting for her to be close enough
