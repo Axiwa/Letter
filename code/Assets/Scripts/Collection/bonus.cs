@@ -19,7 +19,7 @@ public class bonus : MonoBehaviour
 
     [HideInInspector]
     public bool hasTrigger = false;
-    private float fade = 3;
+    private float fade = 2;
 
     int count = 0;
 
@@ -52,8 +52,8 @@ public class bonus : MonoBehaviour
                 count = 0;
             }
             count++;
-            transform.position = Vector3.Lerp(transform.position, letter.transform.position + offset, fade * Time.deltaTime);
-            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, letter.transform.eulerAngles + offset2, fade * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, letter.transform.position + offset, fade * Time.unscaledDeltaTime);
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, letter.transform.eulerAngles + offset2, fade * Time.unscaledDeltaTime);
         }
 
     }
@@ -66,9 +66,15 @@ public class bonus : MonoBehaviour
             // 向玩家移动，在到达之前不会消失，透明度下降
             hasTrigger = true;
             if (info == null){
-                info = GameObject.FindWithTag("popE");
+                foreach (Transform child in transform){ 
+                    info = child.gameObject;
+                    if (info.CompareTag("popE"))
+                        info.SetActive(true);
+                }
             }
-            info.SetActive(true);
+            else{
+                info.SetActive(true);
+            }
             Time.timeScale = 0f;
             other.GetComponent<Player>().rebirth = transform.position;
             anim.SetBool("Dying", true);

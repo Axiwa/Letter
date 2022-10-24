@@ -40,6 +40,7 @@
      <Compile Include="Assets/Scripts/UI/pressE.cs" />
      <Compile Include="Assets/Scripts/UI/home.cs" />
      <Compile Include="Assets/Scripts/Players/girl.cs" />
+     <Compile Include="Assets/Scripts/Environment/cam_ending.cs" />
      <Compile Include="Assets/Scripts/Environment/CameraFollow.cs" />
      <Compile Include="Assets/Scripts/Collection/bigBonus.cs" />
      <Compile Include="Assets/Scripts/Tricks/lineInfo.cs" />
@@ -47,6 +48,8 @@
      <Compile Include="Assets/Scripts/Environment/Moon.cs" />
      <Compile Include="Assets/Scripts/UI/menuController.cs" />
      <Compile Include="Assets/Scripts/Tricks/Stair.cs" />
+     <Compile Include="Assets/Scripts/Transition/t1.cs" />
+     <Compile Include="Assets/Scripts/Players/girl_ending.cs" />
      <Compile Include="Assets/Scripts/UI/bonusCount.cs" />
      <Compile Include="Assets/Scripts/Players/Collector.cs" />
      <Compile Include="Assets/Scripts/Transition/t0.cs" />
@@ -60,10 +63,13 @@
      <Compile Include="Assets/Scripts/Players/followSpawner.cs" />
      <Compile Include="Assets/Scripts/Environment/music.cs" />
      <Compile Include="Assets/Scripts/Players/Pingpong.cs" />
+     <Compile Include="Assets/Scripts/Transition/ending_toack.cs" />
      <Compile Include="Assets/Scripts/Manager/deathZone.cs" />
      <Compile Include="Assets/Scripts/UI/Intro/intro4.cs" />
      <Compile Include="Assets/Scripts/Tricks/stair0_1.cs" />
      <Compile Include="Assets/Scripts/UI/Intro/intro3.cs" />
+     <Compile Include="Assets/Scripts/Manager/endZone.cs" />
+     <Compile Include="Assets/Scripts/Transition/t2.cs" />
      <Compile Include="Assets/Scripts/UI/darkComplaint.cs" />
      <Compile Include="Assets/Scripts/UI/Intro/intro1.cs" />
      <Compile Include="Assets/Scripts/UI/Intro/intro0.cs" />

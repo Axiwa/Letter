@@ -55,7 +55,7 @@ public class Boss : MonoBehaviour
 
     }
 
-    void AnimatePlayer(){
+    public void AnimatePlayer(){
         if (health < 0.3 * initialHealth){
             // state 1
         }
@@ -93,6 +93,7 @@ public class Boss : MonoBehaviour
     }
 
     private void OnDestroy() {
-        // anim.SetBool(state4, true);
+        music.SetActive(false);
+        healthObj.SetActive(false);
     }
 }

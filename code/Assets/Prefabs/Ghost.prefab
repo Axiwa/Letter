@@ -123,8 +123,8 @@ GameObject:
   - component: {fileID: 6630630506761977533}
   - component: {fileID: 6630630506761977532}
   - component: {fileID: 6630630506761977507}
-  - component: {fileID: 1082463788975733810}
   - component: {fileID: 1273630387}
+  - component: {fileID: 1888976251}
   m_Layer: 6
   m_Name: Ghost
   m_TagString: Enemy
@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 6630630506761977505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.35, y: -2.95, z: 0}
-  m_LocalScale: {x: 0.53616285, y: 0.53616285, z: 0.53616285}
+  m_LocalScale: {x: 0.6397464, y: 0.57274085, z: 0.735401}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9174131621340744254}
@@ -187,9 +187,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -711439249
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea7b122f87ad6b5beac9aa5eb5a56ad9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93e0c66cfde8ffda39631e0fc179724d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -210,7 +210,7 @@ Animator:
   m_GameObject: {fileID: 6630630506761977505}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d861fd9e9f65f7713ba2a97f3f65443c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 460473931d4c381ccae83d835e51425d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -241,22 +241,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &1082463788975733810
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6630630506761977505}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.07721015, y: 0.061493974}
-  m_Size: {x: 2.077012, y: 2.077012}
-  m_Direction: 0
 --- !u!114 &1273630387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,3 +254,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+--- !u!58 &1888976251
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630630506761977505}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0766104, y: -0.121985264}
+  serializedVersion: 2
+  m_Radius: 0.6560064

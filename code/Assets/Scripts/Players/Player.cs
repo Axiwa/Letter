@@ -211,12 +211,19 @@ public class Player : MonoBehaviour
                     myBody.AddForce(new Vector2(10f, 3f), ForceMode2D.Impulse);
                 }
                 other.gameObject.GetComponent<Boss>().health--;
+                other.gameObject.GetComponent<Boss>().AnimatePlayer();
             }
             else{
                 re();      
                 return;    
             }
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.CompareTag("Edge")){
+            movementX = 0;
+        }        
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -238,6 +245,10 @@ public class Player : MonoBehaviour
                 re();
                 return;
             }
+        }
+
+        if (other.CompareTag("Edge")){
+            movementX = 0;
         }
         
         if (other.gameObject.CompareTag("debris") && !other.GetComponent<bonus>().hasTrigger && linkedState == 0){

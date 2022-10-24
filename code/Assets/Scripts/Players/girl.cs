@@ -83,7 +83,6 @@ public class girl : MonoBehaviour
         if (!letter){
             // 主角g了，小女孩哭泣动画，结束游戏
             anim.SetTrigger("cry"); 
-            Destroy(gameObject);
             return;
         }
 

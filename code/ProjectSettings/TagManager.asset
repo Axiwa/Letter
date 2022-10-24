@@ -55,6 +55,9 @@ TagManager:
   - name: BG
     uniqueID: 617312021
     locked: 0
+  - name: tree
+    uniqueID: 606960023
+    locked: 0
   - name: Player
     uniqueID: 3583528047
     locked: 0

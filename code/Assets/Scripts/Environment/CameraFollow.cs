@@ -15,8 +15,7 @@ public class CameraFollow : MonoBehaviour {
     private Vector3 Targetpos; //摄像机的最终目标
     public float smooth; //摄像机平滑移动的值
 
-    [SerializeField]
-    private float minY = -70;
+    private float minY = -8;
 
     [SerializeField]
     private float height = 5;
@@ -26,8 +25,8 @@ public class CameraFollow : MonoBehaviour {
 
     [SerializeField]
     private bool transition = false;
-    [SerializeField]
-    private bool resume = false;
+    [HideInInspector]
+    public bool resume = false;
 
 
     // Use this for initialization
@@ -44,6 +43,9 @@ public class CameraFollow : MonoBehaviour {
             return;
         }
 
+        if (transform.position.x >= 413.9){
+            return;
+        }
 
         if (player.movementX > 0){
             targetX = player.transform.position.x + Aheadx;
@@ -83,6 +85,7 @@ public class CameraFollow : MonoBehaviour {
             // 相机正在垂直方向转换视角
             if (Vector3.Distance(Targetpos, transform.position) < 0.01){
                 transition = false;
+                resume = true;
             }
             Targetpos = new Vector3(targetX, player.transform.position.y + aheady, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, Targetpos, smooth * Time.unscaledDeltaTime);
