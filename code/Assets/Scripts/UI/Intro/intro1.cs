@@ -7,32 +7,34 @@ public class intro1 : MonoBehaviour
 {
     private bool begin;
     private bool end;
-    private Text text;
+    private SpriteRenderer text;
     private Color oldColor;
     private Color newColor;
+    bool hasTrigger = false;
 
     [SerializeField]
-    private GameObject monster;
-    private GameObject player;
+    private GameObject jump;
+
+    [SerializeField]
+    private GameObject now;
+
+    [SerializeField]
+    public GameObject pressR;
 
     float fadeTime = 1.5f;
     void Start()
     {
         begin = false;
         end = false;
-        text = gameObject.GetComponent<Text>();
-        oldColor = new Color(0.5566f, 0.5566f, 0.5566f, 1);
+        text = gameObject.GetComponent<SpriteRenderer>();
+        oldColor = new Color(text.color.r, text.color.g, text.color.b, 1);
         newColor = new Color(text.color.r, text.color.g, text.color.b, 0);
-
-        player = GameObject.FindWithTag("Player");
+        text.color = newColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!player){
-            return;
-        }
         if (begin && end){
             text.color = Color.Lerp(text.color, newColor, fadeTime * Time.deltaTime);
             return;
@@ -40,11 +42,27 @@ public class intro1 : MonoBehaviour
         if (begin){
             text.color = Color.Lerp(text.color, oldColor, fadeTime * Time.deltaTime);
         }
-        if (monster && Vector3.Distance(monster.transform.position, player.transform.position) < 4){
-            begin = true;
-        }
-        if (!monster && Input.GetKey(KeyCode.R)){
+        if (!jump && Input.GetKey(KeyCode.R)){
             end = true;
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+            now.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (hasTrigger)
+        {
+            return;
+        }
+        
+        if (other.CompareTag("Player"))
+        {
+            hasTrigger = true;
+            begin = true;
+            jump.SetActive(true);
         }
     }
 }

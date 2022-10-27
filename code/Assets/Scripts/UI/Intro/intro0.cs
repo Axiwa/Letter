@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class intro0 : MonoBehaviour
 {
     private bool begin;
-    private Text text;
+    private SpriteRenderer text;
     private Color newColor;
     float fadeTime = 2f;
     void Start()
     {
         begin = false;
-        text = gameObject.GetComponent<Text>();
+        text = gameObject.GetComponent<SpriteRenderer>();
         newColor = new Color(text.color.r, text.color.g, text.color.b, 0);
     }
 

@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 6630630506761977532}
   - component: {fileID: 6630630506761977507}
   - component: {fileID: 1273630387}
-  - component: {fileID: 1888976251}
+  - component: {fileID: 2003956361}
   m_Layer: 6
   m_Name: Ghost
   m_TagString: Enemy
@@ -236,7 +236,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d2c1f4e11516059429b222c4e72b0a59, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
---- !u!58 &1888976251
-CircleCollider2D:
+--- !u!70 &2003956361
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -267,6 +267,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0766104, y: -0.121985264}
-  serializedVersion: 2
-  m_Radius: 0.6560064
+  m_Offset: {x: 0.0602007, y: 0.017431997}
+  m_Size: {x: 1.2642148, y: 1.4470023}
+  m_Direction: 0

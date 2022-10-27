@@ -5,37 +5,28 @@ using UnityEngine.UI;
 
 public class intro3 : MonoBehaviour
 {
-    private GameObject letter;
-    [SerializeField]
-    private GameObject line;
-    private Text text;
-    private bool begin;
-    private bool end;
-    private Color oldColor;
+    private GameObject girl;
     private Color newColor;
-    float fadeTime = 1.5f;
+    float fadeTime = 0.5f;
+    private SpriteRenderer text;
 
     // Start is called before the first frame update
     void Start()
     {
-        letter = GameObject.FindWithTag("Player");
-        text = GetComponent<Text>();
-        begin = false;
-        end = false;
-        oldColor = new Color(0.5566f, 0.5566f, 0.5566f, 1);
+        girl = GameObject.FindWithTag("Girl");
+        text = GetComponent<SpriteRenderer>();
         newColor = new Color(text.color.r, text.color.g, text.color.b, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (end){
-            text.color = Color.Lerp(text.color, newColor, fadeTime * Time.deltaTime);
-            return;
+        if (text.color.a < 0.1f)
+        {
+            Destroy(gameObject);
         }
 
-        if (line.GetComponent<lineInfo>().hasCollided){
-            end = true;
-        }
+        transform.position = girl.transform.position + new Vector3(0.5f, 1, 0);
+        text.color = Color.Lerp(text.color, newColor, fadeTime * Time.deltaTime);
     }
 }

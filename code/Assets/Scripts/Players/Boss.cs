@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -69,20 +70,25 @@ public class Boss : MonoBehaviour
 
     IEnumerator SpawnMonsters(){
         while (true){
-            yield return new WaitForSeconds(Random.Range(5, 10));
+            yield return new WaitForSeconds(Random.Range(4,  6));
+            if (abs(letter.transform.position.x - transform.position.x) > 40f)
+            {
+                continue;
+            }
             randomIndex = Random.Range(0, monsterReference.Length);
 
             spawnedMonster = Instantiate(monsterReference[randomIndex]);
 
             spawnedMonster.transform.position = pos.position;
-            spawnedMonster.GetComponent<Monster>().speed = -Random.Range(1, 5);
+            spawnedMonster.GetComponent<followMonster>().speed = -Random.Range(1, 5);
+            spawnedMonster.GetComponent<followMonster>().distance = 10f;
             var scale = Random.Range(0.4f, 1f);
-            spawnedMonster.transform.localScale = new Vector3(-1 * scale, scale, 1f);        
+            spawnedMonster.transform.localScale = new Vector3(scale, scale, 1f);        
         } 
     }
 
     public void appear(){
-        anim.SetBool("appear", true);
+        anim.SetTrigger("appear");
         // Activate health
         StartCoroutine(SpawnMonsters());
     }
@@ -95,5 +101,17 @@ public class Boss : MonoBehaviour
     private void OnDestroy() {
         music.SetActive(false);
         healthObj.SetActive(false);
+    }
+
+    float abs(float a)
+    {
+        if (a > 0)
+        {
+            return a;
+        }
+        else
+        {
+            return -a;
+        }
     }
 }

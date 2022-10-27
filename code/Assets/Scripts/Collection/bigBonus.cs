@@ -26,13 +26,16 @@ public class bigBonus : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Updata()
     {
         // Animation for player
+  
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")){
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
             // 向玩家移动，在到达之前不会消失，透明度下降
             // if (info == null){
             //     info = GameObject.FindWithTag("popE");
@@ -43,4 +46,19 @@ public class bigBonus : MonoBehaviour
         }
     }
 
-}
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                // 向玩家移动，在到达之前不会消失，透明度下降
+                // if (info == null){
+                //     info = GameObject.FindWithTag("popE");
+                // }
+                // info.SetActive(true);
+                // Time.timeScale = 0f;
+                Destroy(gameObject);
+            }
+        }
+
+    }

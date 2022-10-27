@@ -6,25 +6,30 @@ using Random = UnityEngine.Random;
 
 public class bonus : MonoBehaviour
 {
-    private GameObject letter;
+    [HideInInspector]
+    public GameObject letter;
 
     [SerializeField]
-    private float velocity = 1f;
+    public float velocity = 1f;
 
     [SerializeField]
     private GameObject info;
 
-    private Animator anim;
-    private SpriteRenderer sr;
+    [HideInInspector]
+    public Animator anim;
+    [HideInInspector]
+    public SpriteRenderer sr;
 
     [HideInInspector]
     public bool hasTrigger = false;
-    private float fade = 2;
+    [HideInInspector]
+    public float fade = 4;
 
-    int count = 0;
+    [HideInInspector]
+    public int count = 0;
 
-    Vector3 offset;
-    Vector3 offset2;
+    [HideInInspector] public Vector3 offset;
+    [HideInInspector] public Vector3 offset2;
 
     void Awake(){
         
@@ -77,6 +82,36 @@ public class bonus : MonoBehaviour
             }
             Time.timeScale = 0f;
             other.GetComponent<Player>().rebirth = transform.position;
+            anim.SetBool("Dying", true);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (hasTrigger)
+        {
+            return;
+        }
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<Player>().linkedState == 0)
+        {
+            // 向玩家移动，在到达之前不会消失，透明度下降
+            hasTrigger = true;
+            GetComponent<Collider2D>().isTrigger = true;
+            if (info == null)
+            {
+                foreach (Transform child in transform)
+                {
+                    info = child.gameObject;
+                    if (info.CompareTag("popE"))
+                        info.SetActive(true);
+                }
+            }
+            else
+            {
+                info.SetActive(true);
+            }
+            Time.timeScale = 0f;
+            other.gameObject.GetComponent<Player>().rebirth = transform.position;
             anim.SetBool("Dying", true);
         }
     }

@@ -9,7 +9,7 @@ public class darkComplaint : MonoBehaviour
     private Text text;
     private Color oldColor;
     private Color newColor;
-    float fadeTime = 0.8f;
+    float fadeTime = 0.6f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class darkComplaint : MonoBehaviour
 
         transform.position = girl.transform.position + new Vector3(0, 3, 0);
         
-        text.color = new Color(0.5566f, 0.5566f, 0.5566f, 0f);
+        text.color = new Color(1, 1, 1, 0f);
         newColor = new Color(text.color.r, text.color.g, text.color.b, 0);
     }
 

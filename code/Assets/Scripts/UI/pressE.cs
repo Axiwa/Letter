@@ -17,9 +17,7 @@ public class pressE : MonoBehaviour
     public Image t;//指向自身图片
 
     private void Awake() {
-        blinkSpeed = 3f;
         isAddAlpha = true;
-        timeval = 2f;
         timer = 0;
     }
     private void Start()

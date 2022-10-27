@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class intro4 : MonoBehaviour
 {
@@ -9,60 +11,38 @@ public class intro4 : MonoBehaviour
     private bool end;
 
     [SerializeField]
-    private Text text;
-    [SerializeField]
-    private Text pressC;
+    private GameObject line;
 
-    private GameObject girl;
-
+    private SpriteRenderer text;
     private Color oldColor;
     private Color newColor;
     float fadeTime = 1.5f;
 
     void Start()
     {
-        text.color = new Color(0.5566f, 0.5566f, 0.5566f, 0);
-        pressC.color = new Color(0.5566f, 0.5566f, 0.5566f, 0);
-        begin = false;
+        begin = true;
         end = false;
-        oldColor = new Color(0.5566f, 0.5566f, 0.5566f, 0.8f);
-        newColor = new Color(text.color.r, text.color.g, text.color.b, 0); 
-        girl = GameObject.FindWithTag("Girl"); 
+        text = gameObject.GetComponent<SpriteRenderer>();
+        oldColor = new Color(text.color.r, text.color.g, text.color.b, 1);
+        newColor = new Color(text.color.r, text.color.g, text.color.b, 0);
+        text.color = newColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (end && text.color.a < 0.001f){
-            end = false;
-        }
-        if (end){
+        if (begin && end)
+        {
             text.color = Color.Lerp(text.color, newColor, fadeTime * Time.deltaTime);
-            pressC.color = Color.Lerp(text.color, newColor, fadeTime * Time.deltaTime);
             return;
         }
-        else if (begin){
+        if (begin)
+        {
             text.color = Color.Lerp(text.color, oldColor, fadeTime * Time.deltaTime);
-            pressC.color = Color.Lerp(text.color, oldColor, fadeTime * Time.deltaTime);
         }
-        if (girl!=null && girl.GetComponent<girl>().inside){
+        if (line.GetComponent<lineInfo>().hasCollided)
+        {
             end = true;
-            begin = false;
-        }        
-    }
-
-
-    void OnCollisionEnter2D(Collision2D other) {
-        if (begin || end){
-            return;
         }
-        if (other.gameObject.CompareTag("Girl")){
-            girl = other.gameObject;
-            begin = true;
-        }          
-    }
-
-    void OnCollisionExit2D(Collision2D other) {
-        end = true;       
     }
 }

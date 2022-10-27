@@ -10,6 +10,8 @@ public class followMonster : MonoBehaviour
     private Animator anim;
     private Rigidbody2D myBody;
 
+    public float distance = 5f;
+
     public float scale = 0.8f;
 
     void Awake(){
@@ -37,7 +39,7 @@ public class followMonster : MonoBehaviour
             transform.localScale = new Vector3(scale, scale, scale);
         }
 
-        if (Vector3.Distance(letter.transform.position, transform.position) < 8f & abs(letter.transform.position.y - transform.position.y) < 2f){
+        if (Vector3.Distance(letter.transform.position, transform.position) <distance & abs(letter.transform.position.y - transform.position.y) < 2f){
             anim.SetBool("Walk", true);
             follow();
         }

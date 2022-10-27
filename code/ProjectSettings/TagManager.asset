@@ -15,6 +15,7 @@ TagManager:
   - popE
   - complaint
   - Boss
+  - text_effect
   layers:
   - Default
   - TransparentFX

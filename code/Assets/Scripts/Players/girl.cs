@@ -16,6 +16,9 @@ public class girl : MonoBehaviour
 
     private float movementX = 1f;
 
+    private float offset = 0.1f;
+    int layerMask;
+
     // [HideInInspector]
     public bool isGrounded = true;
 
@@ -44,7 +47,7 @@ public class girl : MonoBehaviour
     public bool inside; // inmitating the letter
 
     [HideInInspector]
-    public float diffh = 0.2f;
+    public float diffh = 0.12f;
 
     [HideInInspector]
     public bool safe = false; // determine if I am inside the light
@@ -58,6 +61,7 @@ public class girl : MonoBehaviour
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        layerMask = (LayerMask.GetMask("Ground"));
     }
     
     void Start()
@@ -82,7 +86,7 @@ public class girl : MonoBehaviour
     {
         if (!letter){
             // 主角g了，小女孩哭泣动画，结束游戏
-            anim.SetTrigger("cry"); 
+            anim.SetBool(WALK_ANIMATION, false);
             return;
         }
 
@@ -125,14 +129,27 @@ public class girl : MonoBehaviour
 
     }
 
-    void PlayerMoveKeyboard(){
+    void PlayerMoveKeyboard()
+    {
         movementX = Input.GetAxisRaw("Horizontal"); // GetAxis: not only -1 and 1
+        RaycastHit2D hit;
+        if (movementX < 0)
+        {
+            hit = checkRayCast(new Vector2(-1, 0));
+        }
+        else
+        {
+            hit = checkRayCast(new Vector2(1, 0));
+        }
+        if (hit && hit.collider.name != "stair")
+        {
+            Debug.Log(hit.distance);
+            return;
+        }
         transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
     }
 
     private void follow(){
-        Debug.Log(letter.transform.position.y - transform.position.y);
-        Debug.Log(letter.GetComponent<Player>().isGrounded);
         if (letter.GetComponent<Player>().isGrounded && letter.transform.position.y >= transform.position.y + diffh){
             return;
         }  
@@ -146,12 +163,28 @@ public class girl : MonoBehaviour
             movementX = 0;
         }
         AnimatePlayer();
-        
+
+        RaycastHit2D hit;
+        if (movementX < 0)
+        {
+            hit = checkRayCast(new Vector2(-1, 0));
+        }
+        else
+        {
+            hit = checkRayCast(new Vector2(1, 0));
+        }
+        if (hit && hit.collider.name != "stair")
+        {
+            Debug.Log(hit.distance);
+            return;
+        }
+
         // The letter is waiting
-        if (letter.GetComponent<Player>().linkedState == 1){
+        if (letter.GetComponent<Player>().linkedState == 1 && Vector3.Distance(transform.position, letter.transform.position) < 3f)
+        {
             transform.position += new Vector3(moveForce * movementX, 0f, 0f) * Time.deltaTime;            
         }
-        else{
+        else if (Vector3.Distance(transform.position, letter.transform.position) < 2f){
             Vector3 newPosition = new Vector3(letter.GetComponent<Player>().positionList[0].x, letter.GetComponent<Player>().positionList[0].y - 0.024f, letter.GetComponent<Player>().positionList[0].z);
             transform.position = Vector3.Lerp(transform.position, newPosition, 20 * Time.deltaTime);
         }
@@ -243,15 +276,28 @@ public class girl : MonoBehaviour
         }
     }
 
-    void PlayerJump(){
-        if (Input.GetButtonDown("Jump") && isGrounded){ // GetButtonUp: once you leave the button // GetButton: you hold and it will continue to be triggered
+    void PlayerJump()
+    {
+        RaycastHit2D hit;
+        hit = checkRayCast(new Vector2(0, 1));
+        if (hit)
+        {
+            return;
+        }
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
             isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
 
     public void complain(){
-        complaint.GetComponent<Text>().color = new Color(0.5566f, 0.5566f, 0.5566f, 0.8f);
+        complaint.GetComponent<Text>().color = new Color(1, 1, 1, 1f);
+    }
+
+    private RaycastHit2D checkRayCast(Vector2 direction)
+    {
+        return Physics2D.BoxCast(transform.position, new Vector2(0.3f, 0.2f), 0f, direction, offset, layerMask); // 3 
     }
 
     float abs(float a){

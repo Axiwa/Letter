@@ -43,7 +43,7 @@ public class CameraFollow : MonoBehaviour {
             return;
         }
 
-        if (transform.position.x >= 413.9){
+        if (transform.position.x >= 413.9 && player.linkedState == 0){
             return;
         }
 
@@ -81,30 +81,7 @@ public class CameraFollow : MonoBehaviour {
             return;
         }
 
-        if (transition){
-            // 相机正在垂直方向转换视角
-            if (Vector3.Distance(Targetpos, transform.position) < 0.01){
-                transition = false;
-                resume = true;
-            }
-            Targetpos = new Vector3(targetX, player.transform.position.y + aheady, transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, Targetpos, smooth * Time.unscaledDeltaTime);
-            return;
-        }
-        else if (player.transform.position.y > transform.position.y + height){
-            targetY = player.transform.position.y + Aheady;
-            aheady = Aheady;
-            transition = true;
-        }
-        else if (player.transform.position.y < transform.position.y - height){
-            targetY = player.transform.position.y - Aheady;
-            // 如果想做出朝下的效果，这里改成-Aheady
-            aheady = Aheady;
-            transition = true;
-        }
-        else{
-            targetY = transform.position.y;
-        }
+        targetY = transform.position.y;
 
         Targetpos = new Vector3(targetX, targetY, transform.position.z);
 

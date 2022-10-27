@@ -45,7 +45,6 @@ public class bossZone : MonoBehaviour
             return;
         }
 
-        hasExit = true;
 
         if (!oldmusic){
             oldmusic = GameObject.FindWithTag("Sound");
@@ -53,7 +52,7 @@ public class bossZone : MonoBehaviour
 
         if (bossTr == null){
             // Change music
-            oldmusic.GetComponent<AudioSource>().Stop();
+            hasExit = true;
             oldmusic.GetComponent<AudioSource>().Play();
         }
 
